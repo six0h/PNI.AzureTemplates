@@ -2,7 +2,7 @@
   "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
   "contentVersion": "1.0.0.0",
   "parameters": {
-    "Environment": {
+    "PNIEnvironment": {
       "type": "string",
       "metadata": {
         "description": "Environment that our VNet belongs to"
@@ -47,7 +47,7 @@
     },
     "PNIGlobalGatewayName": {
       "type": "string",
-      "default": "[concat(parameters('Environment'), 'sysgws01')]",
+      "default": "[concat(parameters('PNIEnvironment'), 'sysgws01')]",
       "metadata": {
         "description": "The Name of the VNet Gateway in the PNIGlobal Resource Group"
       }
@@ -167,13 +167,13 @@
   ],
   "variables": {
     "ApiVersion": "2015-06-15",
-    "ResourceGroupName": "[concat(parameters('Environment'), parameters('Customer'), parameters('Country'))]",
+    "ResourceGroupName": "[concat(parameters('PNIEnvironment'), parameters('Customer'), parameters('Country'))]",
     "VNetName": "[variables('ResourceGroupName')]",
     "VNetId": "[resourceId('Microsoft.Network/virtualNetworks',variables('VNetName'))]",
     "PublicIPName": "[concat(variables('ResourceGroupName'), 'gwsip01')]",
     "GatewayIPConfigName": "[concat(variables('ResourceGroupName'), 'gwsipcfg01')]",
     "GatewaySubnet": "[concat(variables('VNetId'),'/subnets/GatewaySubnet')]",
     "GatewaySubnetPrefix": "[concat('10.1.', parameters('GatewayZone'), '0/24')]",
-    "GatewayName": "[concat(parameters('Environment'), 'sysgws01')]"
+    "GatewayName": "[concat(parameters('PNIEnvironment'), 'sysgws01')]"
   }
 }
