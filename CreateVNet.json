@@ -41,7 +41,7 @@
     },
     "PNIGlobalGatewayName": {
       "type": "string",
-      "defaultValue": "[concat(parameters('PNIEnvironment'), 'sysgws01')]",
+      "defaultValue": "pgsysgws01",
       "metadata": {
         "description": "The Name of the VNet Gateway in the PNIGlobal Resource Group"
       }
