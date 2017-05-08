@@ -37,7 +37,7 @@
       "metadata": {
         "description": "The Quartet for the Gateway Subnet in the VNet"
       },
-      "defaultValue": 254
+      "defaultValue": 255
     },
     "PNIGlobalGatewayName": {
       "type": "string",
@@ -165,7 +165,7 @@
     "PublicIPName": "[concat(variables('ResourceGroupName'), 'gwsip01')]",
     "GatewayIPConfigName": "[concat(variables('ResourceGroupName'), 'gwsipcfg01')]",
     "GatewaySubnet": "[concat(variables('VNetId'),'/subnets/GatewaySubnet')]",
-    "GatewaySubnetPrefix": "[concat('10.', parameters('CustomerId'), parameters('GatewayZone'), '0/24')]",
+    "GatewaySubnetPrefix": "[concat('10.', parameters('CustomerId'), parameters('GatewayZone'), '0/27')]",
     "GatewayName": "[concat(parameters('PNIEnvironment'), 'sysgws01')]"
   }
 }
