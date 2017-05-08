@@ -119,8 +119,7 @@
     {
       "apiVersion": "[variables('apiVersion')]",
       "dependsOn": [
-        "[concat('Microsoft.Network/virtualNetworkGateways/', variables('GatewayName'))]",
-        "[resourceId('pniglobal', 'Microsoft.Network/virtualNetworkGateways/', parameters('PNIGlobalGatewayName'))]"
+        "[concat('Microsoft.Network/virtualNetworkGateways/', variables('GatewayName'))]"
       ],
       "location": "[resourceGroup().location]",
       "name": "[concat(variables('GatewayName'),parameters('PNIGlobalGatewayName'))]",
@@ -140,8 +139,7 @@
     {
       "apiVersion": "[variables('apiVersion')]",
       "dependsOn": [
-        "[concat('Microsoft.Network/virtualNetworkGateways/', variables('GatewayName'))]",
-        "[resourceId('pniglobal', 'Microsoft.Network/virtualNetworkGateways/', parameters('PNIGlobalGatewayName'))]"
+        "[concat('Microsoft.Network/virtualNetworkGateways/', variables('GatewayName'))]"
       ],
       "location": "[resourceGroup().location]",
       "name": "[concat(parameters('PNIGlobalGatewayName'),variables('GatewayName'))]",
