@@ -39,12 +39,6 @@
       },
       "default": 254
     },
-    "Subnets": {
-      "type": "array",
-      "metadata": {
-        "description": "The subnets to create in your VNet"
-      }
-    },
     "PNIGlobalGatewayName": {
       "type": "string",
       "default": "[concat(parameters('PNIEnvironment'), 'sysgws01')]",
