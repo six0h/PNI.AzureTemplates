@@ -72,7 +72,7 @@
         },
         "subnets": [
           {
-            "name": "GatewaySubnet",
+            "name": "[variables('GatewayName')]",
             "properties": {
               "addressPrefix": "[variables('GatewaySubnetPrefix')]"
             }
@@ -104,7 +104,7 @@
             "properties": {
               "privateIPAllocationMethod": "Dynamic",
               "subnet": {
-                "id": "[variables('GatewaySubnet')]"
+                "id": "[resourceId('Microsoft.Network/virtualNetworkGateways', variables('GatewaySubnet'))]"
               },
               "publicIPAddress": {
                 "id": "[resourceId('Microsoft.Network/publicIPAddresses', variables('PublicIPName'))]"
