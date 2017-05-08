@@ -118,13 +118,12 @@
     },
     {
       "apiVersion": "[variables('apiVersion')]",
-      "type": "Microsoft.Network/connections",
-      "name": "[concat(variables('GatewayName'),parameters('PNIGlobalGatewayName'))]",
-      "location": "[resourceGroup().location]",
       "dependsOn": [
         "[concat('Microsoft.Network/virtualNetworkGateways/', variables('GatewayName'))]",
         "[concat('Microsoft.Network/virtualNetworkGateways/', parameters('PNIGlobalGatewayName'))]"
       ],
+      "location": "[resourceGroup().location]",
+      "name": "[concat(variables('GatewayName'),parameters('PNIGlobalGatewayName'))]",
       "properties": {
         "virtualNetworkGateway1": {
           "id": "[resourceId('Microsoft.Network/virtualNetworkGateways',variables('GatewayName'))]"
@@ -135,17 +134,17 @@
         "connectionType": "Vnet2Vnet",
         "routingWeight": 3,
         "sharedKey": "[parameters('SharedKey')]"
-      }
+      },
+      "type": "Microsoft.Network/connections"
     },
     {
       "apiVersion": "[variables('apiVersion')]",
-      "type": "Microsoft.Network/connections",
-      "name": "[concat(parameters('PNIGlobalGatewayName'),variables('GatewayName'))]",
-      "location": "[resourceGroup().location]",
       "dependsOn": [
         "[concat('Microsoft.Network/virtualNetworkGateways/', variables('GatewayName'))]",
         "[concat('Microsoft.Network/virtualNetworkGateways/', parameters('PNIGlobalGatewayName'))]"
       ],
+      "location": "[resourceGroup().location]",
+      "name": "[concat(parameters('PNIGlobalGatewayName'),variables('GatewayName'))]",
       "properties": {
         "virtualNetworkGateway2": {
           "id": "[resourceId('Microsoft.Network/virtualNetworkGateways',variables('GatewayName'))]"
@@ -156,7 +155,8 @@
         "connectionType": "Vnet2Vnet",
         "routingWeight": 3,
         "sharedKey": "[parameters('SharedKey')]"
-      }
+      },
+      "type": "Microsoft.Network/connections"
     }
   ],
   "variables": {
