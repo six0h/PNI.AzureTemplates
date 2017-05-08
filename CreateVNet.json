@@ -37,7 +37,7 @@
       "metadata": {
         "description": "The Quartet for the Gateway Subnet in the VNet"
       },
-      "default": 254
+      "defaultValue": 254
     },
     "PNIGlobalGatewayName": {
       "type": "string",
