@@ -12,7 +12,9 @@
       "type": "string"
     }
   },
-  "variables": {},
+  "variables": {
+    "ApiVersion": "2015-06-15"
+  },
   "resources": [
     {
       "apiVersion": "[variables('apiVersion')]",
