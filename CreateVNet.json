@@ -104,7 +104,7 @@
             "properties": {
               "privateIPAllocationMethod": "Dynamic",
               "subnet": {
-                "id": "[resourceId('Microsoft.Network/virtualNetworkGateways', variables('GatewaySubnet'))]"
+                "id": "[resourceId('Microsoft.Network/virtualNetworkGateways', variables('GatewayName'))]"
               },
               "publicIPAddress": {
                 "id": "[resourceId('Microsoft.Network/publicIPAddresses', variables('PublicIPName'))]"
