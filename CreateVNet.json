@@ -120,7 +120,7 @@
       "apiVersion": "[variables('apiVersion')]",
       "dependsOn": [
         "[concat('Microsoft.Network/virtualNetworkGateways/', variables('GatewayName'))]",
-        "[concat('Microsoft.Network/virtualNetworkGateways/', parameters('PNIGlobalGatewayName'))]"
+        "[resourceId('pniglobal', 'Microsoft.Network/virtualNetworkGateways/', parameters('PNIGlobalGatewayName'))]"
       ],
       "location": "[resourceGroup().location]",
       "name": "[concat(variables('GatewayName'),parameters('PNIGlobalGatewayName'))]",
@@ -141,7 +141,7 @@
       "apiVersion": "[variables('apiVersion')]",
       "dependsOn": [
         "[concat('Microsoft.Network/virtualNetworkGateways/', variables('GatewayName'))]",
-        "[concat('Microsoft.Network/virtualNetworkGateways/', parameters('PNIGlobalGatewayName'))]"
+        "[resourceId('pniglobal', 'Microsoft.Network/virtualNetworkGateways/', parameters('PNIGlobalGatewayName'))]"
       ],
       "location": "[resourceGroup().location]",
       "name": "[concat(parameters('PNIGlobalGatewayName'),variables('GatewayName'))]",
@@ -150,7 +150,7 @@
           "id": "[resourceId('Microsoft.Network/virtualNetworkGateways',variables('GatewayName'))]"
         },
         "virtualNetworkGateway1": {
-          "id": "[resourceId('pniglobal', 'Microsoft.Network/virtualNetworkGateways',parameters('PNIGlobalGatewayName'))]"
+          "id": "[resourceId('pniglobal', 'Microsoft.Network/virtualNetworkGateways', parameters('PNIGlobalGatewayName'))]"
         },
         "connectionType": "ExpressRoute",
         "routingWeight": 3,
