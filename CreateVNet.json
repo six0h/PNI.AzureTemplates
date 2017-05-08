@@ -129,9 +129,9 @@
           "id": "[resourceId('Microsoft.Network/virtualNetworkGateways',variables('GatewayName'))]"
         },
         "virtualNetworkGateway2": {
-          "id": "[resourceId('Microsoft.Network/virtualNetworkGateways',parameters('PNIGlobalGatewayName'))]"
+          "id": "[resourceId('pniglobal', 'Microsoft.Network/virtualNetworkGateways',parameters('PNIGlobalGatewayName'))]"
         },
-        "connectionType": "Vnet2Vnet",
+        "connectionType": "ExpressRoute",
         "routingWeight": 3,
         "sharedKey": "[parameters('SharedKey')]"
       },
@@ -150,9 +150,9 @@
           "id": "[resourceId('Microsoft.Network/virtualNetworkGateways',variables('GatewayName'))]"
         },
         "virtualNetworkGateway1": {
-          "id": "[resourceId('Microsoft.Network/virtualNetworkGateways',parameters('PNIGlobalGatewayName'))]"
+          "id": "[resourceId('pniglobal', 'Microsoft.Network/virtualNetworkGateways',parameters('PNIGlobalGatewayName'))]"
         },
-        "connectionType": "Vnet2Vnet",
+        "connectionType": "ExpressRoute",
         "routingWeight": 3,
         "sharedKey": "[parameters('SharedKey')]"
       },
