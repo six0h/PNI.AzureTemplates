@@ -104,7 +104,7 @@
             "properties": {
               "privateIPAllocationMethod": "Dynamic",
               "subnet": {
-                "id": "[variables('GatewaySubnet')]"
+                "id": "[resourceId('Microsoft.Network/virtualNetwork', concat(variables('ResourceGroupName'), '/subnets/GatewaySubnet'))]"
               },
               "publicIPAddress": {
                 "id": "[resourceId('Microsoft.Network/publicIPAddresses', variables('PublicIPName'))]"
@@ -167,5 +167,11 @@
     "GatewaySubnet": "[concat(variables('VNetId'),'/subnets/GatewaySubnet')]",
     "GatewaySubnetPrefix": "[concat('10.', parameters('CustomerId'), '.', parameters('GatewayZone'), '.0/27')]",
     "GatewayName": "[concat(parameters('PNIEnvironment'), 'sysgws01')]"
+  },
+  "outputs": {
+    "virtualGateway": {
+      "type": "string",
+      "value": "[reference(variables('GatewayName'))]"
+    }
   }
 }

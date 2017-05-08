@@ -1,0 +1,63 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "ResourceGroup1": {
+      "type": "string",
+      "metadata": {
+        "description": "The name of the resource group containing your initiating vnet Gateway"
+      }
+    },
+    "GatewayName1": {
+      "type": "string",
+      "metadata": {
+        "description": "The name of of the virtualNetworkGateway that you would like to initiate the relationship from"
+      }
+    },
+    "ResourceGroup2": {
+      "type": "string",
+      "metadata": {
+        "description": "The name of the resource group of the remote gateway"
+      }
+    },
+    "GatewayName2": {
+      "type": "string",
+      "metadata": {
+        "description": "The name of the remote virtualNetworkGateway you would like to initiate the relationsihp to"
+      }
+    },
+    "SharedKey": {
+      "type": "string",
+      "metadata": {
+        "description": "Pre-Shared Key for Gateway Connections"
+      }
+    }
+  },
+  "resources": [
+    {
+      "apiVersion": "[variables('ApiVersion')]",
+      "dependsOn": [
+        "[concat('Microsoft.Network/virtualNetworkGateways/', parameters('GatewayName1'))]"
+      ],
+      "location": "[resourceGroup().location]",
+      "name": "[concat(parameters('GatewayName1'),parameters('GatewayName2'))]",
+      "properties": {
+        "virtualNetworkGateway2": {
+          "id": "[resourceId('Microsoft.Network/virtualNetworkGateways',parameters('GatewayName1'))]"
+        },
+        "virtualNetworkGateway1": {
+          "id": "[resourceId('pniglobal', 'Microsoft.Network/virtualNetworkGateways', parameters('GatewayName2'))]"
+        },
+        "connectionType": "ExpressRoute",
+        "routingWeight": 3,
+        "sharedKey": "[parameters('SharedKey')]"
+      },
+      "type": "Microsoft.Network/connections"
+    }
+  ],
+  "variables": {
+    "ApiVersion": "2015-06-15"
+  },
+  "outputs": {
+  }
+}
