@@ -47,7 +47,8 @@
         },
         "routingWeight": 3,
         "sharedKey": "[parameters('SharedKey')]",
-        "vpnType": "RouteBased"
+        "vpnType": "RouteBased",
+        "ConnectionType": "Vnet2VNet"
       },
       "type": "Microsoft.Network/connections"
     }
