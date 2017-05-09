@@ -125,7 +125,7 @@
     "PublicIPName": "[concat(variables('ResourceGroupName'), 'gwsip01')]",
     "GatewayIPConfigName": "[concat(variables('ResourceGroupName'), 'gwsipcfg01')]",
     "GatewaySubnetPrefix": "[concat('10.', parameters('CustomerId'), '.', parameters('GatewayZone'), '.0/27')]",
-    "GatewayName": "[concat(parameters('PNIEnvironment'), 'esysgws01')]",
+    "GatewayName": "[concat(parameters('PNIEnvironment'), 'sysgws01')]",
     "GatewaySubnet": "[concat(variables('VNetId'),'/subnets/',variables('GatewayName'))]"
   },
   "outputs": {
