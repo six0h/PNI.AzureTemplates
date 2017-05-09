@@ -124,7 +124,7 @@
     "VNetId": "[resourceId('Microsoft.Network/virtualNetworks',variables('VNetName'))]",
     "PublicIPName": "[concat(variables('ResourceGroupName'), 'gwsip01')]",
     "GatewayIPConfigName": "[concat(variables('ResourceGroupName'), 'gwsipcfg01')]",
-    "GatewaySubnet": "[resourceId('Microsoft.Network/virtualNetworks/subnets','GatewaySubnet')]",
+    "GatewaySubnet": "[resourceId('Microsoft.Network/virtualNetworks/subnets',variables('GatewayName'))]",
     "GatewaySubnetPrefix": "[concat('10.', parameters('CustomerId'), '.', parameters('GatewayZone'), '.0/27')]",
     "GatewayName": "[concat(parameters('PNIEnvironment'), 'sysgws01')]"
   },
