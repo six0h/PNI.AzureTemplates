@@ -130,7 +130,7 @@
   },
   "outputs": {
     "virtualGateway": {
-      "type": "string",
+      "type": "object",
       "value": "[reference(variables('GatewayName'))]"
     }
   }
