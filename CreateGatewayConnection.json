@@ -31,10 +31,6 @@
       "metadata": {
         "description": "Pre-Shared Key for Gateway Connections"
       }
-    },
-    "VirtualNetworkGateway2": {
-      "type": "string",
-      "defaultValue": "[resourceId(parameters('ResourceGroup2'), 'Microsoft.Network/virtualNetworkGateways', parameters('GatewayName2'))]"
     }
   },
   "resources": [
@@ -50,7 +46,7 @@
           "id": "[resourceId('Microsoft.Network/virtualNetworkGateways',parameters('GatewayName1'))]"
         },
         "virtualNetworkGateway2": {
-          "id": "[parameters('VirtualNetworkGateway2')]"
+          "id": "[resourceId('Microsoft.Network/virtualNetworkGateways',parameters('GatewayName2'))]"
         },
         "routingWeight": 3,
         "sharedKey": "[parameters('SharedKey')]",

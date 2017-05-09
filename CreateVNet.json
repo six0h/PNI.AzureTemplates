@@ -128,10 +128,5 @@
     "GatewayName": "[concat(parameters('PNIEnvironment'), 'sysgws01')]",
     "GatewaySubnet": "[concat(variables('VNetId'),'/subnets/GatewaySubnet')]"
   },
-  "outputs": {
-    "virtualGateway": {
-      "type": "string",
-      "value": "[reference(resourceId('Microsoft.Network/virtualNetworkGateways', variables('GatewayName')))]"
-    }
-  }
+  "outputs": {}
 }
