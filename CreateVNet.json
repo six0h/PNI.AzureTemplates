@@ -104,7 +104,7 @@
             "properties": {
               "privateIPAllocationMethod": "Dynamic",
               "subnet": {
-                "id": "[resourceId('Microsoft.Network/virtualNetwork', concat(variables('ResourceGroupName'), '/subnets/GatewaySubnet'))]"
+                "id": "[concat(variables('VNetId'),'/subnets/GatewaySubnet')]"
               },
               "publicIPAddress": {
                 "id": "[resourceId('Microsoft.Network/publicIPAddresses', variables('PublicIPName'))]"
@@ -129,26 +129,6 @@
         },
         "virtualNetworkGateway2": {
           "id": "[resourceId('pniglobal', 'Microsoft.Network/virtualNetworkGateways',parameters('PNIGlobalGatewayName'))]"
-        },
-        "connectionType": "ExpressRoute",
-        "routingWeight": 3,
-        "sharedKey": "[parameters('SharedKey')]"
-      },
-      "type": "Microsoft.Network/connections"
-    },
-    {
-      "apiVersion": "[variables('apiVersion')]",
-      "dependsOn": [
-        "[concat('Microsoft.Network/virtualNetworkGateways/', variables('GatewayName'))]"
-      ],
-      "location": "[resourceGroup().location]",
-      "name": "[concat(parameters('PNIGlobalGatewayName'),variables('GatewayName'))]",
-      "properties": {
-        "virtualNetworkGateway2": {
-          "id": "[resourceId('Microsoft.Network/virtualNetworkGateways',variables('GatewayName'))]"
-        },
-        "virtualNetworkGateway1": {
-          "id": "[resourceId('pniglobal', 'Microsoft.Network/virtualNetworkGateways', parameters('PNIGlobalGatewayName'))]"
         },
         "connectionType": "ExpressRoute",
         "routingWeight": 3,
