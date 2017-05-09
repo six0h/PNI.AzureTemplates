@@ -31,6 +31,10 @@
       "metadata": {
         "description": "Pre-Shared Key for Gateway Connections"
       }
+    },
+    "VirtualNetworkGateway2": {
+      "type": "string",
+      "defaultValue": "[resourceId(parameters('ResourceGroup2'), 'Microsoft.Network/virtualNetworkGateways', parameters('GatewayName2'))]"
     }
   },
   "resources": [
@@ -42,13 +46,12 @@
       "location": "[resourceGroup().location]",
       "name": "[concat(parameters('GatewayName1'),parameters('GatewayName2'))]",
       "properties": {
-        "virtualNetworkGateway2": {
+        "virtualNetworkGateway1": {
           "id": "[resourceId('Microsoft.Network/virtualNetworkGateways',parameters('GatewayName1'))]"
         },
-        "virtualNetworkGateway1": {
-          "id": "[resourceId('pniglobal', 'Microsoft.Network/virtualNetworkGateways', parameters('GatewayName2'))]"
+        "virtualNetworkGateway2": {
+          "id": "[parameters('VirtualNetworkGateway2')]"
         },
-        "connectionType": "ExpressRoute",
         "routingWeight": 3,
         "sharedKey": "[parameters('SharedKey')]"
       },
