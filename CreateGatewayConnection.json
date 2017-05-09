@@ -36,17 +36,14 @@
   "resources": [
     {
       "apiVersion": "[variables('ApiVersion')]",
-      "dependsOn": [
-        "[concat('Microsoft.Network/virtualNetworkGateways/', parameters('GatewayName1'))]"
-      ],
       "location": "[resourceGroup().location]",
       "name": "[concat(parameters('GatewayName1'),parameters('GatewayName2'))]",
       "properties": {
         "virtualNetworkGateway1": {
-          "id": "[resourceId('Microsoft.Network/virtualNetworkGateways',parameters('GatewayName1'))]"
+          "id": "[resourceId(parameters('ResourceGroup1'), 'Microsoft.Network/virtualNetworkGateways',parameters('GatewayName1'))]"
         },
         "virtualNetworkGateway2": {
-          "id": "[resourceId('Microsoft.Network/virtualNetworkGateways',parameters('GatewayName2'))]"
+          "id": "[resourceId(parameters('ResourceGroup2'), 'Microsoft.Network/virtualNetworkGateways',parameters('GatewayName2'))]"
         },
         "routingWeight": 3,
         "sharedKey": "[parameters('SharedKey')]",
