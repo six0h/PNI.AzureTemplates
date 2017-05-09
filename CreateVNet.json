@@ -129,9 +129,5 @@
     "GatewaySubnet": "[concat(variables('VNetId'),'/subnets/GatewaySubnet')]"
   },
   "outputs": {
-    "virtualGateway": {
-      "type": "object",
-      "value": "[reference(variables('GatewayName'))]"
-    }
   }
 }
