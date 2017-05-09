@@ -131,7 +131,7 @@
   "outputs": {
     "virtualGateway": {
       "type": "object",
-      "value": "[reference(resourceId('Microsoft.Network/virtualNetworkGateways',variables('GatewayName')))]"
+      "value": "[resourceId('Microsoft.Network/virtualNetworkGateways',variables('GatewayName'))]"
     }
   }
 }
