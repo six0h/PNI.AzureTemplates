@@ -109,7 +109,8 @@
               "publicIPAddress": {
                 "id": "[resourceId('Microsoft.Network/publicIPAddresses', variables('PublicIPName'))]"
               },
-              "connectionType": "RouteBased",
+              "vpnType": "Route-Based",
+              "gatewayType": "Vpn",
               "sku": {
                 "name": "HighPerformance",
                 "tier": "HighPerformance"
