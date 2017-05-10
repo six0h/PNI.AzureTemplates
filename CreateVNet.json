@@ -57,6 +57,12 @@
       "metadata": {
         "description": "This is the CIDR Block that our VNet will fit within"
       }
+    },
+    "DNSServers": {
+      "type": "array",
+      "metadata": {
+        "description": "Specify a DNS Server"
+      }
     }
   },
   "resources": [
@@ -77,7 +83,10 @@
               "addressPrefix": "[variables('GatewaySubnetPrefix')]"
             }
           }
-        ]
+        ],
+        "dhcpOptions": {
+          "dnsServers": "[parameters('DnsServers')]"
+        }
       },
       "type": "Microsoft.Network/virtualNetworks"
     },
