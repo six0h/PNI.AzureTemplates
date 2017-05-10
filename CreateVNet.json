@@ -108,17 +108,17 @@
               },
               "publicIPAddress": {
                 "id": "[resourceId('Microsoft.Network/publicIPAddresses', variables('PublicIPName'))]"
-              },
-              "vpnType": "RouteBased",
-              "gatewayType": "Vpn",
-              "sku": {
-                "name": "HighPerformance",
-                "tier": "HighPerformance"
               }
             },
             "name": "[variables('GatewayIPConfigName')]"
           }
-        ]
+        ],
+        "vpnType": "RouteBased",
+        "gatewayType": "Vpn",
+        "sku": {
+          "name": "HighPerformance",
+          "tier": "HighPerformance"
+        }
       },
       "type": "Microsoft.Network/virtualNetworkGateways"
     }
