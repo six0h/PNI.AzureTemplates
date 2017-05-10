@@ -113,8 +113,8 @@
             "name": "[variables('GatewayIPConfigName')]"
           }
         ],
-        "vpnType": "RouteBased",
-        "gatewayType": "Vpn",
+        "VpnType": "RouteBased",
+        "GatewayType": "Vpn",
         "sku": {
           "name": "HighPerformance",
           "tier": "HighPerformance"
