@@ -181,6 +181,12 @@
           "domainName": {
             "value": "[parameters('existingDomainName')]"
           },
+          "domainUsername": {
+            "value": "[parameters('domainUsername')]"
+          },
+          "domainPassword": {
+            "value": "[parameters('domainPassword')]"
+          },
           "lbSubnetUri": {
             "value": "[variables('sqlSubnetRef')]"
           },
