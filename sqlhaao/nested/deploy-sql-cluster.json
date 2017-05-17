@@ -14,6 +14,12 @@
     "adminUsername": {
       "type": "string"
     },
+    "domainUsername": {
+      "type": "string"
+    },
+    "domainPassword": {
+      "type": "string"
+    },
     "count": {
       "type": "int",
       "defaultValue": 2
@@ -386,6 +392,12 @@
 					"domainName": {
 						"value": "[parameters('domainName')]"
 					},
+          "domainUsername": {
+            "value": "[parameters('domainUsername')]"
+          },
+          "domainPassword": {
+            "value": "[parameters('domainPassword')]"
+          },
 					"sharePath": {
             "value": "[variables('sqlWitnessSharePath')]"
 					},

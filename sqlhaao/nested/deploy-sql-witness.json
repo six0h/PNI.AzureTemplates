@@ -8,6 +8,12 @@
     "domainName": {
       "type": "string"
     },
+    "domainUsername": {
+      "type": "string"
+    },
+    "domainPassword": {
+      "type": "string"
+    },
     "sharePath": {
       "type": "string"
     },
@@ -48,8 +54,8 @@
             "domainName": "[parameters('domainName')]",
             "sharePath": "[parameters('sharePath')]",
             "adminCreds": {
-              "userName": "[parameters('adminUserName')]",
-              "password": "PrivateSettingsRef:adminPassword"
+              "userName": "[parameters('domainUsername')]",
+              "password": "PrivateSettingsRef:domainPassword"
             }
           }
         },
