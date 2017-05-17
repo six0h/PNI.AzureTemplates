@@ -117,7 +117,7 @@
       "metadata": {
         "description": "Size of the SQL VMs to be created"
       },
-      "defaultValue": "Standard_DS3"
+      "defaultValue": "Standard_DS3_v2"
     },
     "sqlWitnessVMSize": {
       "type": "string",
