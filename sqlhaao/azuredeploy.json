@@ -73,7 +73,7 @@
     "namePrefix": {
       "type": "string",
       "metadata": {
-        "description": "Naming prefix for each new resource created. 8-char max, lowercase alphanumeric"
+        "description": "Naming prefix for each new resource created. lowercase alphanumeric"
       }
     },
     "OMSworkSpaceId": {
