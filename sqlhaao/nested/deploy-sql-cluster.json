@@ -438,6 +438,12 @@
 					"domainName": {
 						"value": "[parameters('domainName')]"
 					},
+					"domainUsername": {
+						"value": "[parameters('domainUsername')]"
+					},
+					"domainPassword": {
+						"value": "[parameters('domainPassword')]"
+					},
 					"namePrefix": {
 						"value": "[parameters('namePrefix')]"
 					},

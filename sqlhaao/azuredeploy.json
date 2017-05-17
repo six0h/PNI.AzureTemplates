@@ -166,10 +166,10 @@
             "value": "[parameters('_artifactsLocationSasToken')]"
           },
           "adminPassword": {
-            "value": "[parameters('adminPassword')]"
+            "value": "[parameters('domainPassword')]"
           },
           "adminUsername": {
-            "value": "[parameters('adminUsername')]"
+            "value": "[parameters('domainUsername')]"
           },
           "count": {
             "value": "[parameters('count')]"

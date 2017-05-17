@@ -8,6 +8,12 @@
     "domainName": {
       "type": "string"
     },
+    "domainUsername": {
+      "type": "string"
+    },
+    "domainPassword": {
+      "type": "string"
+    },
     "namePrefix": {
       "type": "string"
     },
@@ -82,7 +88,7 @@
             "sqlAlwaysOnEndpointName": "[parameters('sqlAlwaysOnEndpointName')]",
             "adminCreds": {
               "userName": "[parameters('adminUserName')]",
-              "password": "PrivateSettingsRef:adminPassword"
+              "password": "[parameters('domainPassword')]"
             },
             "sqlServiceCreds": {
               "userName": "[parameters('sqlServerServiceAccountUserName')]",
