@@ -173,6 +173,9 @@
           "adminUsername": {
             "value": "[parameters('adminUsername')]"
           },
+          "count": {
+            "value": "[parameters('count')]"
+          },
           "dnsServerName": {
             "value": "[parameters('existingAdPDCVMName')]"
           },
