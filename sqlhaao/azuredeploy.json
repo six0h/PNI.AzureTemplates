@@ -1,0 +1,218 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "_artifactsLocation": {
+      "type": "string",
+      "metadata": {
+        "description": "Location of resources that the script is dependent on such as linked templates and DSC modules"
+      },
+      "defaultValue": "https://raw.githubusercontent.com/six0h/PNI.Azure.PowerShell/master/AzureRM/AzureRM/"
+    },
+    "_artifactsLocationSasToken": {
+      "type": "string"
+    },
+    "adminPassword": {
+      "type": "securestring",
+      "metadata": {
+        "description": "Password for the Administrator account of the existing Active Directory Domain"
+      }
+    },
+    "adminUsername": {
+      "type": "string",
+      "metadata": {
+        "description": "Name of the Administrator of the existing Active Directory Domain"
+      }
+    },
+    "count": {
+      "type": "int",
+      "defaultValue": 2
+    },
+    "domainOptions": {
+      "type": "int",
+      "defaultValue": 3
+    },
+    "domainPassword": {
+      "type": "string"
+    },
+    "domainUsername": {
+      "type": "string"
+    },
+    "dscConfTag": {
+      "type": "string"
+    },
+    "envTag": {
+      "type": "string"
+    },
+    "existingAdPDCVMName": {
+      "type": "string",
+      "maxLength": 15,
+      "metadata": {
+        "description": "Computer name of the existing Primary AD domain controller & DNS server"
+      }
+    },
+    "existingDomainName": {
+      "type": "string",
+      "metadata": {
+        "description": "DNS domain name for existing Active Directory domain"
+      }
+    },
+    "existingSqlSubnetName": {
+      "type": "string",
+      "metadata": {
+        "description": "Name of the existing subnet in the existing VNET to which the SQL & Witness VMs should be deployed"
+      },
+      "defaultValue": "default"
+    },
+    "existingVirtualNetworkName": {
+      "type": "string",
+      "metadata": {
+        "description": "Resource ID of the existing VNET. You can find the Resource ID for the VNET on the Properties blade of the VNET."
+      }
+    },
+    "namePrefix": {
+      "type": "string",
+      "maxLength": 8,
+      "metadata": {
+        "description": "Naming prefix for each new resource created. 8-char max, lowercase alphanumeric"
+      }
+    },
+    "OMSworkSpaceId": {
+      "type": "string"
+    },
+    "OMSworkSpaceSecret": {
+      "type": "string"
+    },
+    "ouPath": {
+      "type": "string",
+      "defaultValue": ""
+    },
+    "regionTag": {
+      "type": "string"
+    },
+    "retTag": {
+      "type": "string"
+    },
+    "sqlLBIPAddress": {
+      "type": "string",
+      "metadata": {
+        "description": "IP address of ILB for the SQL Server AlwaysOn listener to be created"
+      },
+      "defaultValue": "10.0.1.10"
+    },
+    "sqlServerServiceAccountPassword": {
+      "type": "securestring",
+      "metadata": {
+        "description": "The SQL Server Service account password"
+      }
+    },
+    "sqlServerServiceAccountUserName": {
+      "type": "string",
+      "metadata": {
+        "description": "The SQL Server Service account name"
+      }
+    },
+    "sqlVMSize": {
+      "type": "string",
+      "metadata": {
+        "description": "Size of the SQL VMs to be created"
+      },
+      "defaultValue": "Standard_DS3"
+    },
+    "sqlWitnessVMSize": {
+      "type": "string",
+      "metadata": {
+        "description": "Size of the Witness VM to be created"
+      },
+      "defaultValue": "Standard_DS1"
+    },
+    "storageAccountType": {
+      "type": "string",
+      "allowedValues": [
+        "Standard_LRS",
+        "Standard_GRS",
+        "Standard_RAGRS",
+        "Premium_LRS"
+      ],
+      "metadata": {
+        "description": "Type of new Storage Accounts (Standard_LRS, Standard_GRS, Standard_RAGRS or Premium_LRS) to be created to store VM disks"
+      },
+      "defaultValue": "Premium_LRS"
+    },
+    "trackTag": {
+      "type": "string"
+    },
+    "updateTag": {
+      "type": "string"
+    }
+  },
+  "variables": {
+    "existingVirtualNetworkId": "[resourceId('Microsoft.Networks/virtualNetworks', 'pniglobal')]",
+    "sqlSubnetRef": "[concat(variables('existingVirtualNetworkId'),'/subnets/',parameters('existingSqlSubnetName'))]",
+    "deploySqlClusterTemplateURL": "[concat(parameters('_artifactsLocation'),'/nested/deploy-sql-cluster.json')]",
+    "deploySqlCluster": "deploySqlCluster"
+  },
+  "resources": [
+    {
+      "name": "[variables('deploySqlCluster')]",
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2015-01-01",
+      "dependsOn": [],
+      "properties": {
+        "mode": "Incremental",
+        "parameters": {
+          "_artifactsLocation": {
+            "value": "[parameters('_artifactsLocation')]"
+          },
+          "_artifactsLocationSasToken": {
+            "value": "[parameters('_artifactsLocationSasToken')]"
+          },
+          "adminPassword": {
+            "value": "[parameters('adminPassword')]"
+          },
+          "adminUsername": {
+            "value": "[parameters('adminUsername')]"
+          },
+          "dnsServerName": {
+            "value": "[parameters('existingAdPDCVMName')]"
+          },
+          "domainName": {
+            "value": "[parameters('existingDomainName')]"
+          },
+          "lbSubnetUri": {
+            "value": "[variables('sqlSubnetRef')]"
+          },
+          "namePrefix": {
+            "value": "[parameters('namePrefix')]"
+          },
+          "nicSubnetUri": {
+            "value": "[variables('sqlSubnetRef')]"
+          },
+          "sqlLBIPAddress": {
+            "value": "[parameters('sqlLBIPAddress')]"
+          },
+          "sqlServerServiceAccountPassword": {
+            "value": "[parameters('sqlServerServiceAccountPassword')]"
+          },
+          "sqlServerServiceAccountUserName": {
+            "value": "[parameters('sqlServerServiceAccountUserName')]"
+          },
+          "sqlVMSize": {
+            "value": "[parameters('sqlVMSize')]"
+          },
+          "sqlWitnessVMSize": {
+            "value": "[parameters('sqlWitnessVMSize')]"
+          },
+          "storageAccountType": {
+            "value": "[parameters('storageAccountType')]"
+          }
+        },
+        "templateLink": {
+          "uri": "[variables('deploySqlClusterTemplateURL')]",
+          "contentVersion": "1.0.0.0"
+        }
+      }
+    }
+  ],
+  "outputs": {}
+}
