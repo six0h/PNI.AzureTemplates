@@ -147,7 +147,7 @@
     }
   },
   "variables": {
-    "existingVirtualNetworkId": "[resourceId('Microsoft.Networks/virtualNetworks', 'pniglobal')]",
+    "existingVirtualNetworkId": "[resourceId('pniglobal', 'Microsoft.Networks/virtualNetworks', 'pniglobal')]",
     "sqlSubnetRef": "[concat(variables('existingVirtualNetworkId'),'/subnets/',parameters('existingSqlSubnetName'))]",
     "deploySqlClusterTemplateURL": "[concat(parameters('_artifactsLocation'),'/nested/deploy-sql-cluster.json')]",
     "deploySqlCluster": "deploySqlCluster"
