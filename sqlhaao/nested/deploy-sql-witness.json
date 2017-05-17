@@ -55,7 +55,7 @@
             "sharePath": "[parameters('sharePath')]",
             "adminCreds": {
               "userName": "[parameters('domainUsername')]",
-              "password": "[parameters('domainPassword')]"
+              "password": "PrivateSettingsRef:adminPassword"
             }
           }
         },

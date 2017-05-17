@@ -88,7 +88,7 @@
             "sqlAlwaysOnEndpointName": "[parameters('sqlAlwaysOnEndpointName')]",
             "adminCreds": {
               "userName": "[parameters('adminUserName')]",
-              "password": "[parameters('domainPassword')]"
+              "password": "PrivateSettingsRef:adminPassword"
             },
             "sqlServiceCreds": {
               "userName": "[parameters('sqlServerServiceAccountUserName')]",
@@ -98,7 +98,7 @@
         },
         "protectedSettings": {
           "items": {
-            "adminPassword": "[parameters('adminPassword')]",
+            "adminPassword": "[parameters('domainPassword')]",
             "sqlServerServiceAccountPassword": "[parameters('sqlServerServiceAccountPassword')]"
           }
         }
