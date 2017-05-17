@@ -15,7 +15,8 @@
       "type": "string"
     },
     "count": {
-      "type": "int"
+      "type": "int",
+      "defaultValue": 2
     },
     "dnsServerName": {
       "type": "string"
@@ -386,7 +387,7 @@
 						"value": "[parameters('domainName')]"
 					},
 					"sharePath": {
-						"value": "[variables('sqlWitnessSharePath')]"
+            "value": "[variables('sqlWitnessSharePath')]"
 					},
 					"adminUsername": {
 						"value": "[parameters('adminUsername')]"
