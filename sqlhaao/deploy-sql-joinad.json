@@ -1,0 +1,92 @@
+{
+  "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "namePrefix": {
+      "type": "string"
+    },
+    "domain": {
+      "type": "string"
+    },
+    "domainUsername": {
+      "type": "string"
+    },
+    "domainPassword": {
+      "type": "string"
+    },
+    "domainOptions": {
+      "type": "int",
+      "defaultValue": 3
+    },
+    "ouPath": {
+      "type": "string",
+      "defaultValue": ""
+    }
+  },
+  "variables": {
+    "sqlNamePrefix": "[concat(parameters('namePrefix'),'-sql-')]"
+  },
+  {
+    "apiVersion": "2015-06-15",
+    "type": "Microsoft.Compute/virtualMachines/extensions",
+    "name": "[concat(parameters('sqlNamePrefix'), copyIndex(),'/joindomain')]",
+    "location": "[resourceGroup().location]",
+    "copy": {
+      "name": "extcopy",
+      "count": "[parameters('count')]"
+    },
+    "dependsOn": [
+      "[concat('Microsoft.Compute/virtualMachines/', concat(parameters('sqlNamePrefix'), copyIndex()))]"
+    ],
+    "properties": {
+      "publisher": "Microsoft.Compute",
+      "type": "JsonADDomainExtension",
+      "typeHandlerVersion": "1.3",
+      "autoUpgradeMinorVersion": true,
+      "settings": {
+        "Name": "[parameters('domainToJoin')]",
+        "OUPath": "[parameters('ouPath')]",
+        "User": "[concat(parameters('domain'), '\\', parameters('domainUsername'))]",
+        "Restart": "true",
+        "Options": "[parameters('domainJoinOptions')]"
+      },
+      "protectedSettings": {
+        "Password": "[parameters('domainPassword')]"
+      }
+    }
+  },
+  {
+    "type": "Microsoft.Compute/virtualMachines/extensions",
+    "name": "[concat(parameters('sqlNamePrefix'), copyIndex(),'/IaaSAntiMalware')]",
+    "apiVersion": "2016-04-30-preview",
+    "location": "[resourceGroup().location]",
+    "copy": {
+      "name": "malcopy",
+      "count": "[parameters('count')]"
+    },
+    "dependsOn": [
+      "[concat('Microsoft.Compute/virtualMachines/', concat(parameters('sqlNamePrefix'), copyIndex()))]"
+    ],
+    "properties": {
+      "publisher": "Microsoft.Azure.Security",
+      "type": "IaaSAntimalware",
+      "typeHandlerVersion": "1.3",
+      "settings": {
+        "AntimalwareEnabled": "true",
+        "Exclusions": {
+          "Paths": "C:\\Users",
+          "Extensions": ".txt",
+          "Processes": "taskmgr.exe"
+        },
+        "RealtimeProtectionEnabled": true,
+        "ScheduledScanSettings": {
+          "isEnabled": "true",
+          "scanType": "Quick",
+          "day": "7",
+          "time": "120"
+        }
+      },
+      "protectedSettings": null
+    }
+  }
+}
