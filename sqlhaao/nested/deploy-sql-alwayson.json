@@ -82,8 +82,8 @@
               "password": "PrivateSettingsRef:adminPassword"
             },
             "sqlServiceCreds": {
-              "userName": "[parameters('sqlServerServiceAccountUserName')]",
-              "password": "PrivateSettingsRef:sqlServerServiceAccountPassword"
+              "userName": "[parameters('domainUsername')]",
+              "password": "PrivateSettingsRef:adminPassword"
             }
           }
         },
