@@ -9,7 +9,7 @@
       "type": "string"
     },
     "domainPassword": {
-      "type": "string"
+      "type": "securestring"
     },
     "vmName": {
       "type": "string"
@@ -56,7 +56,7 @@
     "sqlAOPrepareConfigurationFunction": "PrepareAlwaysOnSqlServer.ps1\\PrepareAlwaysOnSqlServer",
     "createClusterModulesURL": "[concat(parameters('_artifactsLocation'),'/dsc/create-failover-cluster.ps1.zip',parameters('_artifactsLocationSasToken'))]",
     "createClusterConfigurationFunction": "CreateFailoverCluster.ps1\\CreateFailoverCluster",
-    "clusterName": "[parameters('namePrefix')]"
+    "clusterName": "[parameters('vmName')]"
   },
   "resources": [
     {

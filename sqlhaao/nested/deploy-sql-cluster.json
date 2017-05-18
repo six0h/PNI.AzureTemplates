@@ -8,12 +8,6 @@
     "_artifactsLocationSasToken": {
       "type": "string"
     },
-    "adminPassword": {
-      "type": "securestring"
-    },
-    "adminUsername": {
-      "type": "string"
-    },
     "domainUsername": {
       "type": "string"
     },
@@ -263,8 +257,8 @@
 				},
 				"osProfile": {
 					"computerName": "[concat(variables('sqlNamePrefix'), copyindex())]",
-					"adminUsername": "[parameters('adminUsername')]",
-					"adminPassword": "[parameters('adminPassword')]"
+					"adminUsername": "[parameters('domainUsername')]",
+          "adminPassword": "[parameters('domainPassword')]"
 				},
 				"storageProfile": {
 					"imageReference": {
@@ -332,8 +326,8 @@
 				},
 				"osProfile": {
 					"computerName": "[variables('sqlWitnessVMName')]",
-					"adminUsername": "[parameters('adminUsername')]",
-					"adminPassword": "[parameters('adminPassword')]"
+					"adminUsername": "[parameters('domainUsername')]",
+					"adminPassword": "[parameters('domainPassword')]"
 				},
 				"storageProfile": {
 					"imageReference": {
@@ -400,12 +394,6 @@
           },
 					"sharePath": {
             "value": "[variables('sqlWitnessSharePath')]"
-					},
-					"adminUsername": {
-						"value": "[parameters('adminUsername')]"
-					},
-					"adminPassword": {
-						"value": "[parameters('adminPassword')]"
 					},
 					"_artifactsLocation": {
 						"value": "[parameters('_artifactsLocation')]"

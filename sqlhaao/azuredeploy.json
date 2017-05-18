@@ -12,18 +12,6 @@
     "_artifactsLocationSasToken": {
       "type": "string"
     },
-    "adminPassword": {
-      "type": "securestring",
-      "metadata": {
-        "description": "Password for the Administrator account of the existing Active Directory Domain"
-      }
-    },
-    "adminUsername": {
-      "type": "string",
-      "metadata": {
-        "description": "Name of the Administrator of the existing Active Directory Domain"
-      }
-    },
     "count": {
       "type": "int",
       "defaultValue": 2
@@ -164,12 +152,6 @@
           },
           "_artifactsLocationSasToken": {
             "value": "[parameters('_artifactsLocationSasToken')]"
-          },
-          "adminPassword": {
-            "value": "[parameters('domainPassword')]"
-          },
-          "adminUsername": {
-            "value": "[parameters('domainUsername')]"
           },
           "count": {
             "value": "[parameters('count')]"
