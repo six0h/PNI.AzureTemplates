@@ -89,8 +89,8 @@
 		"sqlLBBEAddressPoolID": "[concat(variables('sqllbID'),'/backendAddressPools/',variables('lbBE'))]",
 		"sqlAOProbe1": "[concat(variables('sqlNamePrefix'),'hb')]",
 		"sqlLBProbeID1": "[concat(variables('sqllbID'),'/probes/',variables('sqlAOProbe1'))]",
-		"sqlStorageAccountPrefix": "[concat(parameters('namePrefix'),take(uniqueString(resourceGroup().id),8),'sql')]",
-		"sqlWitnessStorageAccountName": "[concat(parameters('namePrefix'),take(uniqueString(resourceGroup().id),8),'wit')]",
+		"sqlStorageAccountPrefix": "[concat(parameters('namePrefix'),take(uniqueString(resourceGroup().id),8))]",
+		"sqlWitnessStorageAccountName": "[concat(parameters('namePrefix'),take(uniqueString(resourceGroup().id),8))]",
 		"vmContainerName": "vhds",
 		"deploySqlWitnessShare": "deploySqlWitnessShare",
 		"deploySqlWitnessShareId": "[concat('Microsoft.Resources/deployments/', variables('deploySqlWitnessShare'))]",
@@ -99,9 +99,9 @@
 		"sqlWitnessVMName": "[concat(variables('sqlNamePrefix'),'w')]",
 		"deploySqlAlwaysOn": "deploySqlAlwaysOn",
 		"deploySqlAlwaysOnTemplateUrl": "[concat(parameters('_artifactsLocation'),'/nested/deploy-sql-alwayson.json',parameters('_artifactsLocationSasToken'))]",
-		"sqlAOEPName": "[concat(parameters('namePrefix'),'-agep')]",
-		"sqlAOAGName1": "[concat(parameters('namePrefix'),'-ag1')]",
-		"sqlAOListener1": "[concat(parameters('namePrefix'),'-agl1')]"
+		"sqlAOEPName": "[concat(parameters('namePrefix'))]",
+		"sqlAOAGName1": "[concat(parameters('namePrefix'))]",
+		"sqlAOListener1": "[concat(parameters('namePrefix'))]"
 	},
 	"resources": [
 		{
