@@ -72,7 +72,7 @@
 		"apiVersionStorage": "2015-06-15",
 		"sqlDiskSize": 1000,
 		"sqlWitnessDiskSize": 128,
-		"sqlAvailabilitySetName": "[concat(parameters('vmName'),'av')]",
+		"sqlAvailabilitySetName": "[concat(parameters('namePrefix'),'av')]",
     "sqlLBName": "[concat(parameters('namePrefix'),'li')]",
 		"sqllbID": "[resourceId('Microsoft.Network/loadBalancers',variables('sqlLBName'))]",
 		"lbFE1": "[concat(parameters('namePrefix'),'fe1')]",
@@ -279,7 +279,7 @@
               "vhd": {
                 "uri": "[concat(reference(concat('Microsoft.Storage/storageAccounts/',variables('sqlStorageAccountPrefix'),copyIndex()),variables('apiVersionStorage')).primaryEndpoints.blob, variables('vmContainerName'), '/', parameters('namePrefix'), copyindex(), 'st.vhd')]"
               },
-              "name": "[concat(parameters('vmName'), copyindex(), 'st.vhd')]",
+              "name": "[concat(parameters('namePrefix'), copyindex(), 'st.vhd')]",
               "caching": "None",
               "createOption": "Empty",
               "diskSizeGB": "[variables('sqlDiskSize')]",
@@ -287,9 +287,9 @@
             },
             {
               "vhd": {
-                "uri": "[concat(reference(concat('Microsoft.Storage/storageAccounts/',variables('sqlStorageAccountPrefix'),copyIndex()),variables('apiVersionStorage')).primaryEndpoints.blob, variables('vmContainerName'), '/', parameters('vmName'), copyindex(), 'st.vhd')]"
+                "uri": "[concat(reference(concat('Microsoft.Storage/storageAccounts/',variables('sqlStorageAccountPrefix'),copyIndex()),variables('apiVersionStorage')).primaryEndpoints.blob, variables('vmContainerName'), '/', parameters('namePrefix'), copyindex(), 'st.vhd')]"
               },
-              "name": "[concat(parameters('vmName'), copyindex(), 'st.vhd')]",
+              "name": "[concat(parameters('namePrefix'), copyindex(), 'st.vhd')]",
               "caching": "None",
               "createOption": "Empty",
               "diskSizeGB": "[variables('sqlDiskSize')]",
@@ -300,7 +300,7 @@
 				"networkProfile": {
 					"networkInterfaces": [
 						{
-              "id": "[resourceId('Microsoft.Network/networkInterfaces',concat(parameters('vmName'), copyindex()))]"
+              "id": "[resourceId('Microsoft.Network/networkInterfaces',concat(parameters('namePrefix'), copyindex()))]"
 						}
 					]
 				}
@@ -408,8 +408,8 @@
 			"type": "Microsoft.Resources/deployments",
 			"apiVersion": "2015-01-01",
 			"dependsOn": [
-        "[resourceId('Microsoft.Compute/virtualMachines',concat(parameters('vmName'),'0'))]",
-        "[resourceId('Microsoft.Compute/virtualMachines',concat(parameters('vmName'),'1'))]",
+        "[resourceId('Microsoft.Compute/virtualMachines',concat(parameters('namePrefix'),'0'))]",
+        "[resourceId('Microsoft.Compute/virtualMachines',concat(parameters('namePrefix'),'1'))]",
 				"[variables('deploySqlWitnessShareId')]"
 			],
 			"properties": {
