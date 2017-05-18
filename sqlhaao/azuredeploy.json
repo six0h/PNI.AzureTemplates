@@ -174,9 +174,6 @@
           "lbSubnetUri": {
             "value": "[variables('sqlSubnetRef')]"
           },
-          "namePrefix": {
-            "value": "[parameters('namePrefix')]"
-          },
           "nicSubnetUri": {
             "value": "[variables('sqlSubnetRef')]"
           },
