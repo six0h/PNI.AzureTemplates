@@ -95,8 +95,8 @@
 		"deploySqlWitnessShare": "deploySqlWitnessShare",
 		"deploySqlWitnessShareId": "[concat('Microsoft.Resources/deployments/', variables('deploySqlWitnessShare'))]",
 		"deploySqlWitnessShareTemplateUrl": "[concat(parameters('_artifactsLocation'),'/nested/deploy-sql-witness.json',parameters('_artifactsLocationSasToken'))]",
-		"sqlWitnessSharePath": "[concat(parameters('namePrefix'),'-fsw')]",
-		"sqlWitnessVMName": "[concat(variables('sqlNamePrefix'),'w')]",
+		"sqlWitnessSharePath": "[parameters('namePrefix')]",
+    "sqlWitnessVMName": "[variables('sqlNamePrefix')]",
 		"deploySqlAlwaysOn": "deploySqlAlwaysOn",
 		"deploySqlAlwaysOnTemplateUrl": "[concat(parameters('_artifactsLocation'),'/nested/deploy-sql-alwayson.json',parameters('_artifactsLocationSasToken'))]",
 		"sqlAOEPName": "[concat(parameters('namePrefix'))]",
@@ -467,12 +467,6 @@
 					},
 					"sqlServerServiceAccountPassword": {
 						"value": "[parameters('sqlServerServiceAccountPassword')]"
-					},
-					"adminUsername": {
-						"value": "[parameters('adminUsername')]"
-					},
-					"adminPassword": {
-						"value": "[parameters('adminPassword')]"
 					},
 					"_artifactsLocation": {
 						"value": "[parameters('_artifactsLocation')]"

@@ -17,12 +17,6 @@
     "sharePath": {
       "type": "string"
     },
-    "adminUsername": {
-      "type": "string"
-    },
-    "adminPassword": {
-      "type": "securestring"
-    },
     "_artifactsLocation": {
       "type": "string"
     },

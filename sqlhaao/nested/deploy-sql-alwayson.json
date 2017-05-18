@@ -38,12 +38,6 @@
     "sqlServerServiceAccountPassword": {
       "type": "securestring"
     },
-    "adminUsername": {
-      "type": "string"
-    },
-    "adminPassword": {
-      "type": "securestring"
-    },
     "sqlAlwaysOnEndpointName": {
       "type": "string"
     },
@@ -87,7 +81,7 @@
             "domainName": "[parameters('domainName')]",
             "sqlAlwaysOnEndpointName": "[parameters('sqlAlwaysOnEndpointName')]",
             "adminCreds": {
-              "userName": "[parameters('adminUserName')]",
+              "userName": "[parameters('domainUsername')]",
               "password": "PrivateSettingsRef:adminPassword"
             },
             "sqlServiceCreds": {
