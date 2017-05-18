@@ -14,6 +14,12 @@
     "domainPassword": {
       "type": "string"
     },
+    "localUsername": {
+      "type": "string"
+    },
+    "localPassword": {
+      "type": "securestring"
+    },
     "count": {
       "type": "int",
       "defaultValue": 2
@@ -130,7 +136,7 @@
 			"apiVersion": "2015-06-15",
 			"name": "[variables('sqlLBName')]",
 			"type": "Microsoft.Network/loadBalancers",
-			"location": "[resourceGroup().location]",
+      "location": "[resourceGroup().location]",
 			"dependsOn": [],
 			"properties": {
 				"frontendIPConfigurations": [
@@ -247,18 +253,18 @@
         "[resourceId('Microsoft.Network/networkInterfaces',concat(parameters('namePrefix'), copyindex()))]",
 				"[resourceId('Microsoft.Compute/availabilitySets', variables('sqlAvailabilitySetName'))]"
 			],
-			"properties": {
-				"hardwareProfile": {
-					"vmSize": "[parameters('SqlVMSize')]"
-				},
-				"availabilitySet": {
-					"id": "[resourceId('Microsoft.Compute/availabilitySets', variables('sqlAvailabilitySetName'))]"
-				},
-				"osProfile": {
-					"computerName": "[concat(parameters('namePrefix'), copyindex())]",
-					"adminUsername": "[parameters('domainUsername')]",
-          "adminPassword": "[parameters('domainPassword')]"
-				},
+      "properties": {
+        "hardwareProfile": {
+          "vmSize": "[parameters('SqlVMSize')]"
+        },
+        "availabilitySet": {
+          "id": "[resourceId('Microsoft.Compute/availabilitySets', variables('sqlAvailabilitySetName'))]"
+        },
+        "osProfile": {
+          "computerName": "[concat(parameters('namePrefix'), copyindex())]",
+          "adminUsername": "[parameters('localUsername')]",
+          "adminPassword": "[parameters('localPassword')]"
+        },
         "storageProfile": {
           "imageReference": {
             "publisher": "[parameters('windowsImagePublisher')]",
@@ -297,14 +303,14 @@
             }
           ]
         },
-				"networkProfile": {
-					"networkInterfaces": [
-						{
+        "networkProfile": {
+          "networkInterfaces": [
+            {
               "id": "[resourceId('Microsoft.Network/networkInterfaces',concat(parameters('namePrefix'), copyindex()))]"
-						}
-					]
-				}
-			}
+            }
+          ]
+        }
+      }
 		},
 		{
 			"apiVersion": "2015-06-15",
@@ -325,8 +331,8 @@
 				},
 				"osProfile": {
 					"computerName": "[variables('sqlWitnessVMName')]",
-					"adminUsername": "[parameters('domainUsername')]",
-					"adminPassword": "[parameters('domainPassword')]"
+					"adminUsername": "[parameters('localUsername')]",
+          "adminPassword": "[parameters('localPassword')]"
 				},
 				"storageProfile": {
 					"imageReference": {

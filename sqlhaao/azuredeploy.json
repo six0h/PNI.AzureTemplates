@@ -21,10 +21,16 @@
       "defaultValue": 3
     },
     "domainPassword": {
-      "type": "string"
+      "type": "securestring"
     },
     "domainUsername": {
       "type": "string"
+    },
+    "localUsername": {
+      "type": "string"
+    },
+    "localPassword": {
+      "type": "securestring"
     },
     "dscConfTag": {
       "type": "string"
@@ -170,6 +176,12 @@
           },
           "domainPassword": {
             "value": "[parameters('domainPassword')]"
+          },
+          "localUsername": {
+            "value": "[parameters('localUsername')]"
+          },
+          "localPassword": {
+            "value": "[parameters('localPassword')]"
           },
           "lbSubnetUri": {
             "value": "[variables('sqlSubnetRef')]"
