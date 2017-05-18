@@ -11,7 +11,7 @@
     "domainPassword": {
       "type": "securestring"
     },
-    "vmName": {
+    "namePrefix": {
       "type": "string"
     },
     "sharePath": {
@@ -56,12 +56,12 @@
     "sqlAOPrepareConfigurationFunction": "PrepareAlwaysOnSqlServer.ps1\\PrepareAlwaysOnSqlServer",
     "createClusterModulesURL": "[concat(parameters('_artifactsLocation'),'/dsc/create-failover-cluster.ps1.zip',parameters('_artifactsLocationSasToken'))]",
     "createClusterConfigurationFunction": "CreateFailoverCluster.ps1\\CreateFailoverCluster",
-    "clusterName": "[parameters('vmName')]"
+    "clusterName": "[parameters('namePrefix')]"
   },
   "resources": [
     {
       "type": "Microsoft.Compute/virtualMachines/extensions",
-      "name": "[concat(parameters('vmName'),'0/sqlAOPrepare')]",
+      "name": "[concat(parameters('namePrefix'),'0/sqlAOPrepare')]",
       "apiVersion": "2015-06-15",
       "location": "[resourceGroup().location]",
       "dependsOn": [],
@@ -97,11 +97,11 @@
     },
     {
       "type": "Microsoft.Compute/virtualMachines/extensions",
-      "name": "[concat(parameters('vmName'),'1/CreateCluster')]",
+      "name": "[concat(parameters('namePrefix'),'1/CreateCluster')]",
       "apiVersion": "2015-06-15",
       "location": "[resourceGroup().location]",
       "dependsOn": [
-        "[concat('Microsoft.Compute/virtualMachines/',parameters('vmName'),'0/extensions/sqlAOPrepare')]"
+        "[concat('Microsoft.Compute/virtualMachines/',parameters('namePrefix'),'0/extensions/sqlAOPrepare')]"
       ],
       "properties": {
         "publisher": "Microsoft.Powershell",
@@ -117,8 +117,8 @@
             "clusterName": "[variables('clusterName')]",
             "sharePath": "[concat('\\\\',parameters('sqlWitnessVMName'),'\\',parameters('sharePath'))]",
             "nodes": [
-              "[concat(parameters('vmName'),'0')]",
-              "[concat(parameters('vmName'),'1')]"
+              "[concat(parameters('namePrefix'),'0')]",
+              "[concat(parameters('namePrefix'),'1')]"
             ],
             "sqlAlwaysOnEndpointName": "[parameters('sqlAlwaysOnEndpointName')]",
             "sqlAlwaysOnAvailabilityGroupName": "[parameters('sqlAlwaysOnAvailabilityGroupName1')]",
@@ -126,8 +126,8 @@
             "sqlAlwaysOnAvailabilityGroupListenerPort": 1433,
             "lbName": "[parameters('sqlLBName')]",
             "lbAddress": "[parameters('sqlLBIPAddress')]",
-            "primaryReplica": "[concat(parameters('vmName'),'1')]",
-            "secondaryReplica": "[concat(parameters('vmName'),'0')]",
+            "primaryReplica": "[concat(parameters('namePrefix'),'1')]",
+            "secondaryReplica": "[concat(parameters('namePrefix'),'0')]",
             "dnsServerName": "[parameters('dnsServerName')]",
             "adminCreds": {
               "userName": "[parameters('domainUsername')]",
