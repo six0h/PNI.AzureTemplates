@@ -162,6 +162,9 @@
           "domainName": {
             "value": "[parameters('existingDomainName')]"
           },
+          "namePrefix": {
+            "value": "[parameters('namePrefix')]"
+          },
           "domainUsername": {
             "value": "[parameters('domainUsername')]"
           },
