@@ -269,7 +269,7 @@
           "osDisk": {
             "name": "[concat(parameters('namePrefix'), copyindex(), 'os.vhd')]",
             "vhd": {
-              "uri": "[concat(reference(concat('Microsoft.Storage/storageAccounts/',variables('sqlStorageAccountPrefix'),copyIndex()),variables('apiVersionStorage')).primaryEndpoints.blob, variables('vmContainerName'), '/', parameters('namePrefix'), copyindex(), '-osdisk.vhd')]"
+              "uri": "[concat(reference(concat('Microsoft.Storage/storageAccounts/',variables('sqlStorageAccountPrefix'),copyIndex()),variables('apiVersionStorage')).primaryEndpoints.blob, variables('vmContainerName'), '/', parameters('namePrefix'), copyindex(), 'os.vhd')]"
             },
             "caching": "ReadWrite",
             "createOption": "FromImage"
@@ -277,9 +277,9 @@
           "dataDisks": [
             {
               "vhd": {
-                "uri": "[concat(reference(concat('Microsoft.Storage/storageAccounts/',variables('sqlStorageAccountPrefix'),copyIndex()),variables('apiVersionStorage')).primaryEndpoints.blob, variables('vmContainerName'), '/', parameters('namePrefix'), copyindex(), 'st.vhd')]"
+                "uri": "[concat(reference(concat('Microsoft.Storage/storageAccounts/',variables('sqlStorageAccountPrefix'),copyIndex()),variables('apiVersionStorage')).primaryEndpoints.blob, variables('vmContainerName'), '/', parameters('namePrefix'), copyindex(), 'st1.vhd')]"
               },
-              "name": "[concat(parameters('namePrefix'), copyindex(), 'st.vhd')]",
+              "name": "[concat(parameters('namePrefix'), copyindex(), 'st1.vhd')]",
               "caching": "None",
               "createOption": "Empty",
               "diskSizeGB": "[variables('sqlDiskSize')]",
@@ -287,9 +287,9 @@
             },
             {
               "vhd": {
-                "uri": "[concat(reference(concat('Microsoft.Storage/storageAccounts/',variables('sqlStorageAccountPrefix'),copyIndex()),variables('apiVersionStorage')).primaryEndpoints.blob, variables('vmContainerName'), '/', parameters('namePrefix'), copyindex(), 'st.vhd')]"
+                "uri": "[concat(reference(concat('Microsoft.Storage/storageAccounts/',variables('sqlStorageAccountPrefix'),copyIndex()),variables('apiVersionStorage')).primaryEndpoints.blob, variables('vmContainerName'), '/', parameters('namePrefix'), copyindex(), 'st2.vhd')]"
               },
-              "name": "[concat(parameters('namePrefix'), copyindex(), 'st.vhd')]",
+              "name": "[concat(parameters('namePrefix'), copyindex(), 'st2.vhd')]",
               "caching": "None",
               "createOption": "Empty",
               "diskSizeGB": "[variables('sqlDiskSize')]",
@@ -336,9 +336,9 @@
 						"version": "[parameters('windowsImageVersion')]"
 					},
 					"osDisk": {
-						"name": "[concat(variables('sqlWitnessVMName'), '-osdisk.vhd')]",
+						"name": "[concat(variables('sqlWitnessVMName'), 'os.vhd')]",
 						"vhd": {
-							"uri": "[concat(reference(concat('Microsoft.Storage/storageAccounts/',variables('sqlWitnessStorageAccountName')),variables('apiVersionStorage')).primaryEndpoints.blob, variables('vmContainerName'), '/', variables('sqlWitnessVMName'), '-osdisk.vhd')]"
+              "uri": "[concat(reference(concat('Microsoft.Storage/storageAccounts/',variables('sqlWitnessStorageAccountName')),variables('apiVersionStorage')).primaryEndpoints.blob, variables('vmContainerName'), '/', variables('sqlWitnessVMName'), 'os.vhd')]"
 						},
 						"caching": "ReadWrite",
 						"createOption": "FromImage"
@@ -346,9 +346,9 @@
 					"dataDisks": [
 						{
 							"vhd": {
-								"uri": "[concat(reference(concat('Microsoft.Storage/storageAccounts/',variables('sqlWitnessStorageAccountName')),variables('apiVersionStorage')).primaryEndpoints.blob, variables('vmContainerName'), '/', variables('sqlWitnessVMName'), '-datadisk1.vhd')]"
+                "uri": "[concat(reference(concat('Microsoft.Storage/storageAccounts/',variables('sqlWitnessStorageAccountName')),variables('apiVersionStorage')).primaryEndpoints.blob, variables('vmContainerName'), '/', variables('sqlWitnessVMName'), 'st.vhd')]"
 							},
-							"name": "[concat(variables('sqlWitnessVMName'), '-datadisk1.vhd')]",
+              "name": "[concat(variables('sqlWitnessVMName'), 'st.vhd')]",
 							"caching": "None",
 							"createOption": "Empty",
 							"diskSizeGB": "[variables('sqlWitnessDiskSize')]",
@@ -356,13 +356,13 @@
 						}
 					]
 				},
-				"networkProfile": {
-					"networkInterfaces": [
-						{
-							"id": "[resourceId('Microsoft.Network/networkInterfaces',concat(variables('sqlWitnessVMName')))]"
-						}
-					]
-				}
+        "networkProfile": {
+          "networkInterfaces": [
+            {
+              "id": "[resourceId('Microsoft.Network/networkInterfaces',concat(variables('sqlWitnessVMName')))]"
+            }
+          ]
+        }
 			}
 		},
 		{
@@ -373,7 +373,7 @@
 				"[resourceId('Microsoft.Compute/virtualMachines',variables('sqlWitnessVMName'))]"
 			],
 			"properties": {
-				"mode": "Incremental",
+        "mode": "Incremental",
 				"templateLink": {
 					"uri": "[variables('deploySqlWitnessShareTemplateUrl')]",
 					"contentVersion": "1.0.0.0"
