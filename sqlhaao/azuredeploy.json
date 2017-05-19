@@ -35,9 +35,10 @@
     "existingAdPDCVMName": {
       "type": "string",
       "maxLength": 15,
+      "defaultValue": "pgsysdc01",
       "metadata": {
         "description": "Computer name of the existing Primary AD domain controller & DNS server"
-      }
+      },
     },
     "existingDomainName": {
       "type": "string",
@@ -156,7 +157,7 @@
           "count": {
             "value": "[parameters('count')]"
           },
-          "dnsServerName": {
+          "existingAdPDCVMName": {
             "value": "[parameters('existingAdPDCVMName')]"
           },
           "domainName": {

@@ -26,7 +26,7 @@
     "sqlLBIPAddress": {
       "type": "string"
     },
-    "dnsServerName": {
+    "existingAdPDCVMName": {
       "type": "string"
     },
     "sqlServerServiceAccountUserName": {
@@ -128,7 +128,7 @@
             "lbAddress": "[parameters('sqlLBIPAddress')]",
             "primaryReplica": "[concat(parameters('namePrefix'),'1')]",
             "secondaryReplica": "[concat(parameters('namePrefix'),'0')]",
-            "dnsServerName": "[parameters('dnsServerName')]",
+            "existingAdPDCVMName": "[parameters('existingAdPDCVMName')]",
             "adminCreds": {
               "userName": "[parameters('domainUsername')]",
               "password": "PrivateSettingsRef:adminPassword"
