@@ -256,8 +256,8 @@
         },
         "osProfile": {
           "computerName": "[concat(parameters('namePrefix'), copyindex())]",
-          "adminUsername": "[parameters('localUsername')]",
-          "adminPassword": "[parameters('localPassword')]"
+          "adminUsername": "[parameters('sqlServerServiceAccountUserName')]",
+          "adminPassword": "[parameters('sqlServerServiceAccountPassword')]"
         },
         "storageProfile": {
           "imageReference": {
@@ -325,8 +325,8 @@
 				},
 				"osProfile": {
 					"computerName": "[variables('sqlWitnessVMName')]",
-					"adminUsername": "[parameters('localUsername')]",
-          "adminPassword": "[parameters('localPassword')]"
+					"adminUsername": "[parameters('sqlServerServiceAccountUserName')]",
+          "adminPassword": "[parameters('sqlServerServiceAccountPassword')]"
 				},
 				"storageProfile": {
 					"imageReference": {
@@ -382,9 +382,9 @@
 					"sqlWitnessVMName": {
 						"value": "[variables('sqlWitnessVMName')]"
 					},
-					"domainName": {
-						"value": "[parameters('domainName')]"
-					},
+          "domainName": {
+            "value": "[parameters('domainName')]"
+          },
           "domainUsername": {
             "value": "[parameters('domainUsername')]"
           },
@@ -447,10 +447,10 @@
 						"value": "[parameters('dnsServerName')]"
 					},
 					"sqlServerServiceAccountUserName": {
-						"value": "[parameters('localUsername')]"
+						"value": "[parameters('sqlServerServiceAccountUserName')]"
 					},
 					"sqlServerServiceAccountPassword": {
-						"value": "[parameters('localPassword')]"
+            "value": "[parameters('sqlServerServiceAccountPassword')]"
 					},
 					"_artifactsLocation": {
 						"value": "[parameters('_artifactsLocation')]"
