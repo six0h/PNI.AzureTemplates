@@ -26,67 +26,69 @@
       "defaultValue": ""
     }
   },
-  {
-    "apiVersion": "2015-06-15",
-    "type": "Microsoft.Compute/virtualMachines/extensions",
-    "name": "[concat(parameters('vmName'), copyIndex(),'/joindomain')]",
-    "location": "[resourceGroup().location]",
-    "copy": {
-      "name": "extcopy",
-      "count": "[parameters('count')]"
-    },
-    "dependsOn": [
-      "[concat('Microsoft.Compute/virtualMachines/', concat(parameters('vmName'), copyIndex()))]"
-    ],
-    "properties": {
-      "publisher": "Microsoft.Compute",
-      "type": "JsonADDomainExtension",
-      "typeHandlerVersion": "1.3",
-      "autoUpgradeMinorVersion": true,
-      "settings": {
-        "Name": "[parameters('domainName')]",
-        "OUPath": "[parameters('ouPath')]",
-        "User": "[concat(parameters('domainName'), '\\', parameters('domainUsername'))]",
-        "Restart": "true",
-        "Options": "[parameters('domainOptions')]"
+  "resources": [
+    {
+      "apiVersion": "2015-06-15",
+      "type": "Microsoft.Compute/virtualMachines/extensions",
+      "name": "[concat(parameters('vmName'), copyIndex(),'/joindomain')]",
+      "location": "[resourceGroup().location]",
+      "copy": {
+        "name": "extcopy",
+        "count": "[parameters('count')]"
       },
-      "protectedSettings": {
-        "Password": "[parameters('domainPassword')]"
+      "dependsOn": [
+        "[concat('Microsoft.Compute/virtualMachines/', concat(parameters('vmName'), copyIndex()))]"
+      ],
+      "properties": {
+        "publisher": "Microsoft.Compute",
+        "type": "JsonADDomainExtension",
+        "typeHandlerVersion": "1.3",
+        "autoUpgradeMinorVersion": true,
+        "settings": {
+          "Name": "[parameters('domainName')]",
+          "OUPath": "[parameters('ouPath')]",
+          "User": "[concat(parameters('domainName'), '\\', parameters('domainUsername'))]",
+          "Restart": "true",
+          "Options": "[parameters('domainOptions')]"
+        },
+        "protectedSettings": {
+          "Password": "[parameters('domainPassword')]"
+        }
+      }
+    },
+    {
+      "type": "Microsoft.Compute/virtualMachines/extensions",
+      "name": "[concat(parameters('vmName'), copyIndex(),'/IaaSAntiMalware')]",
+      "apiVersion": "2016-04-30-preview",
+      "location": "[resourceGroup().location]",
+      "copy": {
+        "name": "malcopy",
+        "count": "[parameters('count')]"
+      },
+      "dependsOn": [
+        "[concat('Microsoft.Compute/virtualMachines/', concat(parameters('vmName'), copyIndex()))]"
+      ],
+      "properties": {
+        "publisher": "Microsoft.Azure.Security",
+        "type": "IaaSAntimalware",
+        "typeHandlerVersion": "1.3",
+        "settings": {
+          "AntimalwareEnabled": "true",
+          "Exclusions": {
+            "Paths": "C:\\Users",
+            "Extensions": ".txt",
+            "Processes": "taskmgr.exe"
+          },
+          "RealtimeProtectionEnabled": true,
+          "ScheduledScanSettings": {
+            "isEnabled": "true",
+            "scanType": "Quick",
+            "day": "7",
+            "time": "120"
+          }
+        },
+        "protectedSettings": null
       }
     }
-  },
-  {
-    "type": "Microsoft.Compute/virtualMachines/extensions",
-    "name": "[concat(parameters('vmName'), copyIndex(),'/IaaSAntiMalware')]",
-    "apiVersion": "2016-04-30-preview",
-    "location": "[resourceGroup().location]",
-    "copy": {
-      "name": "malcopy",
-      "count": "[parameters('count')]"
-    },
-    "dependsOn": [
-      "[concat('Microsoft.Compute/virtualMachines/', concat(parameters('vmName'), copyIndex()))]"
-    ],
-    "properties": {
-      "publisher": "Microsoft.Azure.Security",
-      "type": "IaaSAntimalware",
-      "typeHandlerVersion": "1.3",
-      "settings": {
-        "AntimalwareEnabled": "true",
-        "Exclusions": {
-          "Paths": "C:\\Users",
-          "Extensions": ".txt",
-          "Processes": "taskmgr.exe"
-        },
-        "RealtimeProtectionEnabled": true,
-        "ScheduledScanSettings": {
-          "isEnabled": "true",
-          "scanType": "Quick",
-          "day": "7",
-          "time": "120"
-        }
-      },
-      "protectedSettings": null
-    }
-  }
+  ]
 }
