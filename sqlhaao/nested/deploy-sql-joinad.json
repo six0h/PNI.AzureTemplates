@@ -3,7 +3,7 @@
   "contentVersion": "1.0.0.0",
   "parameters": {
     "count": {
-      "type": "string"
+      "type": "int"
     },
     "domainName": {
       "type": "string"
