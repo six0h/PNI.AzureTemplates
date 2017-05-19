@@ -94,6 +94,7 @@
 		"deploySqlWitnessShare": "deploySqlWitnessShare",
 		"deploySqlWitnessShareId": "[concat('Microsoft.Resources/deployments/', variables('deploySqlWitnessShare'))]",
 		"deploySqlWitnessShareTemplateUrl": "[concat(parameters('_artifactsLocation'),'/nested/deploy-sql-witness.json',parameters('_artifactsLocationSasToken'))]",
+    "deploySqlJoinAdTemplateUrl": "[concat(parameters('_artifactsLocation'),'/nested/deploy-sql-joinad.json',parameters('_artifactsLocationSasToken'))]",
 		"sqlWitnessSharePath": "[parameters('namePrefix')]",
     "sqlWitnessVMName": "[parameters('namePrefix')]",
 		"deploySqlAlwaysOn": "deploySqlAlwaysOn",
@@ -379,7 +380,7 @@
       "properties": {
         "mode": "Incremental",
         "templateLink": {
-          "uri": "[variables('deploySqlWitnessShareTemplateUrl')]",
+          "uri": "[variables('deploySqlJoinAdTemplateUrl')]",
           "contentVersion": "1.0.0.0"
         },
         "parameters": {
