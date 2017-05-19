@@ -92,9 +92,9 @@
     "sqlWitnessVMName": "[parameters('namePrefix')]",
 		"deploySqlAlwaysOn": "deploySqlAlwaysOn",
 		"deploySqlAlwaysOnTemplateUrl": "[concat(parameters('_artifactsLocation'),'/nested/deploy-sql-alwayson.json',parameters('_artifactsLocationSasToken'))]",
-		"sqlAOEPName": "[concat(parameters('namePrefix'))]",
-		"sqlAOAGName1": "[concat(parameters('namePrefix'))]",
-		"sqlAOListener1": "[concat(parameters('namePrefix'))]"
+    "sqlAOEPName": "[concat(parameters('namePrefix'),0)]",
+		"sqlAOAGName1": "[concat(parameters('namePrefix'),1)]",
+    "sqlAOListener1": "[concat(parameters('namePrefix'),1)]"
 	},
 	"resources": [
 		{
