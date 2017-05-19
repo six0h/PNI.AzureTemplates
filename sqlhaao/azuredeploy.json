@@ -177,7 +177,7 @@
           },
           "ouPath": {
             "value": "[parameters('ouPath')]"
-          }
+          },
           "lbSubnetUri": {
             "value": "[variables('sqlSubnetRef')]"
           },
