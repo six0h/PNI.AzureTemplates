@@ -26,12 +26,6 @@
     "domainUsername": {
       "type": "string"
     },
-    "localUsername": {
-      "type": "string"
-    },
-    "localPassword": {
-      "type": "securestring"
-    },
     "dscConfTag": {
       "type": "string"
     },
