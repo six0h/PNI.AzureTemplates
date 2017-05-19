@@ -376,12 +376,12 @@
       "name": "[variables('deployDomainJoin')]",
 			"type": "Microsoft.Resources/deployments",
 			"apiVersion": "2015-01-01",
-			"properties": {
+      "properties": {
         "mode": "Incremental",
-				"templateLink": {
-					"uri": "[variables('deploySqlWitnessShareTemplateUrl')]",
-					"contentVersion": "1.0.0.0"
-				},
+        "templateLink": {
+          "uri": "[variables('deploySqlWitnessShareTemplateUrl')]",
+          "contentVersion": "1.0.0.0"
+        },
         "parameters": {
           "count": {
             "value": "[parameters('count')]"
@@ -405,6 +405,7 @@
             "value": "[parameters('ouPath')]"
           }
         }
+      }
     },
 		{
 			"name": "[variables('deploySqlWitnessShare')]",

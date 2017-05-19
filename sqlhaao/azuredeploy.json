@@ -72,8 +72,7 @@
       "type": "string"
     },
     "ouPath": {
-      "type": "string",
-      "defaultValue": ""
+      "type": "string"
     },
     "regionTag": {
       "type": "string"
