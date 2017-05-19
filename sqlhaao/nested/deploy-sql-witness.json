@@ -12,7 +12,7 @@
       "type": "string"
     },
     "domainPassword": {
-      "type": "string"
+      "type": "securestring"
     },
     "sharePath": {
       "type": "string"
