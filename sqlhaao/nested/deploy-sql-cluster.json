@@ -14,6 +14,12 @@
     "domainPassword": {
       "type": "string"
     },
+    "domainOptions": {
+      "type": "string"
+    },
+    "ouPath": {
+      "type": "string"
+    },
     "count": {
       "type": "int",
       "defaultValue": 2
@@ -91,6 +97,7 @@
 		"sqlWitnessSharePath": "[parameters('namePrefix')]",
     "sqlWitnessVMName": "[parameters('namePrefix')]",
 		"deploySqlAlwaysOn": "deploySqlAlwaysOn",
+    "deployDomainJoin": "deployDomainJoin",
 		"deploySqlAlwaysOnTemplateUrl": "[concat(parameters('_artifactsLocation'),'/nested/deploy-sql-alwayson.json',parameters('_artifactsLocationSasToken'))]",
     "sqlAOEPName": "[concat(parameters('namePrefix'), 'aoep')]",
 		"sqlAOAGName1": "[concat(parameters('namePrefix'), 'aoag')]",
@@ -233,20 +240,20 @@
 				]
 			}
 		},
-		{
-			"apiVersion": "2015-06-15",
-			"type": "Microsoft.Compute/virtualMachines",
-			"name": "[concat(parameters('namePrefix'), copyindex())]",
-			"location": "[resourceGroup().location]",
-			"copy": {
-				"name": "virtualMachineLoop",
+    {
+      "apiVersion": "2015-06-15",
+      "type": "Microsoft.Compute/virtualMachines",
+      "name": "[concat(parameters('namePrefix'), copyindex())]",
+      "location": "[resourceGroup().location]",
+      "copy": {
+        "name": "virtualMachineLoop",
         "count": "[parameters('count')]"
-			},
-			"dependsOn": [
-				"[resourceId('Microsoft.Storage/storageAccounts',concat(variables('sqlStorageAccountPrefix'),  copyindex()))]",
+      },
+      "dependsOn": [
+        "[resourceId('Microsoft.Storage/storageAccounts',concat(variables('sqlStorageAccountPrefix'),  copyindex()))]",
         "[resourceId('Microsoft.Network/networkInterfaces',concat(parameters('namePrefix'), copyindex()))]",
-				"[resourceId('Microsoft.Compute/availabilitySets', variables('sqlAvailabilitySetName'))]"
-			],
+        "[resourceId('Microsoft.Compute/availabilitySets', variables('sqlAvailabilitySetName'))]"
+      ],
       "properties": {
         "hardwareProfile": {
           "vmSize": "[parameters('SqlVMSize')]"
@@ -305,17 +312,17 @@
           ]
         }
       }
-		},
+    },
 		{
 			"apiVersion": "2015-06-15",
 			"type": "Microsoft.Compute/virtualMachines",
 			"name": "[variables('sqlWitnessVMName')]",
 			"location": "[resourceGroup().location]",
-			"dependsOn": [
-				"[resourceId('Microsoft.Storage/storageAccounts',variables('sqlWitnessStorageAccountName'))]",
+      "dependsOn": [
+        "[resourceId('Microsoft.Storage/storageAccounts',variables('sqlWitnessStorageAccountName'))]",
         "[resourceId('Microsoft.Network/networkInterfaces',concat(variables('sqlWitnessVMName')))]",
-				"[resourceId('Microsoft.Compute/availabilitySets', variables('sqlAvailabilitySetName'))]"
-			],
+        "[resourceId('Microsoft.Compute/availabilitySets', variables('sqlAvailabilitySetName'))]"
+      ],
 			"properties": {
 				"hardwareProfile": {
 					"vmSize": "[parameters('SqlWitnessVMSize')]"
@@ -365,6 +372,40 @@
         }
 			}
 		},
+    {
+      "name": "[variables('deployDomainJoin')]",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2015-01-01",
+			"properties": {
+        "mode": "Incremental",
+				"templateLink": {
+					"uri": "[variables('deploySqlWitnessShareTemplateUrl')]",
+					"contentVersion": "1.0.0.0"
+				},
+        "parameters": {
+          "count": {
+            "value": "[parameters('count')]"
+          },
+          "domainName": {
+            "value": "[parameters('domainName')]"
+          },
+          "domainUsername": {
+            "value": "[parameters('domainUsername')]"
+          },
+          "domainPassword": {
+            "value": "[parameters('domainPassword')]"
+          },
+          "domainOptions": {
+            "value": "[parameters('domainOptions')]"
+          },
+          "vmName": {
+            "value": "[parameters('namePrefix')]"
+          },
+          "ouPath": {
+            "value": "[parameters('ouPath')]"
+          }
+        }
+    },
 		{
 			"name": "[variables('deploySqlWitnessShare')]",
 			"type": "Microsoft.Resources/deployments",
@@ -434,9 +475,9 @@
 					"sharePath": {
 						"value": "[variables('sqlWitnessSharePath')]"
 					},
-					"sqlWitnessVMName": {
-						"value": "[variables('sqlWitnessVMName')]"
-					},
+          "sqlWitnessVMName": {
+            "value": "[variables('sqlWitnessVMName')]"
+          },
 					"sqlLBName": {
 						"value": "[variables('sqlLBName')]"
 					},

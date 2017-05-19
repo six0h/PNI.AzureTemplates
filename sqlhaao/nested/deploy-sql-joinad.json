@@ -5,7 +5,7 @@
     "count": {
       "type": "string"
     },
-    "domain": {
+    "domainName": {
       "type": "string"
     },
     "domainUsername": {
@@ -44,9 +44,9 @@
       "typeHandlerVersion": "1.3",
       "autoUpgradeMinorVersion": true,
       "settings": {
-        "Name": "[parameters('domain')]",
+        "Name": "[parameters('domainName')]",
         "OUPath": "[parameters('ouPath')]",
-        "User": "[concat(parameters('domain'), '\\', parameters('domainUsername'))]",
+        "User": "[concat(parameters('domainName'), '\\', parameters('domainUsername'))]",
         "Restart": "true",
         "Options": "[parameters('domainOptions')]"
       },

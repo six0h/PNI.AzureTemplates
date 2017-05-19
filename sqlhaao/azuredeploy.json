@@ -160,11 +160,11 @@
           "existingAdPDCVMName": {
             "value": "[parameters('existingAdPDCVMName')]"
           },
-          "domainName": {
-            "value": "[parameters('existingDomainName')]"
-          },
           "namePrefix": {
             "value": "[parameters('namePrefix')]"
+          },
+          "domainName": {
+            "value": "[parameters('existingDomainName')]"
           },
           "domainUsername": {
             "value": "[parameters('domainUsername')]"
@@ -172,6 +172,12 @@
           "domainPassword": {
             "value": "[parameters('domainPassword')]"
           },
+          "domainOptions": {
+            "value": "[parameters('domainOptions')]"
+          },
+          "ouPath": {
+            "value": "[parameters('ouPath')]"
+          }
           "lbSubnetUri": {
             "value": "[variables('sqlSubnetRef')]"
           },
