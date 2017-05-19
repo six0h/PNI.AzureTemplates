@@ -452,9 +452,9 @@
 					"sqlServerServiceAccountPassword": {
             "value": "[parameters('sqlServerServiceAccountPassword')]"
 					},
-					"_artifactsLocation": {
-						"value": "[parameters('_artifactsLocation')]"
-					},
+          "_artifactsLocation": {
+            "value": "[parameters('_artifactsLocation')]"
+          },
 					"_artifactsLocationSasToken": {
 						"value": "[parameters('_artifactsLocationSasToken')]"
 					},

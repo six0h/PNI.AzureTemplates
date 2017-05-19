@@ -171,12 +171,6 @@
           "domainPassword": {
             "value": "[parameters('domainPassword')]"
           },
-          "localUsername": {
-            "value": "[parameters('localUsername')]"
-          },
-          "localPassword": {
-            "value": "[parameters('localPassword')]"
-          },
           "lbSubnetUri": {
             "value": "[variables('sqlSubnetRef')]"
           },
