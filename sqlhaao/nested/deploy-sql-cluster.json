@@ -403,7 +403,7 @@
           "domainOptions": {
             "value": "[parameters('domainOptions')]"
           },
-          "vmName": {
+          "namePrefix": {
             "value": "[parameters('namePrefix')]"
           },
           "ouPath": {

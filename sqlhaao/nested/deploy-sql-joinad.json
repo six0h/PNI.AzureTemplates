@@ -18,7 +18,7 @@
       "type": "int",
       "defaultValue": 3
     },
-    "vmName": {
+    "namePrefix": {
       "type": "string"
     },
     "ouPath": {
@@ -29,14 +29,14 @@
     {
       "apiVersion": "2015-06-15",
       "type": "Microsoft.Compute/virtualMachines/extensions",
-      "name": "[concat(parameters('vmName'), copyIndex(),'/joindomain')]",
+      "name": "[concat(parameters('namePrefix'), copyIndex(),'/joindomain')]",
       "location": "[resourceGroup().location]",
       "copy": {
         "name": "extcopy",
         "count": "[parameters('count')]"
       },
       "dependsOn": [
-        "[concat('Microsoft.Compute/virtualMachines/', concat(parameters('vmName'), copyIndex()))]"
+        "[concat('Microsoft.Compute/virtualMachines/', concat(parameters('namePrefix'), copyIndex()))]"
       ],
       "properties": {
         "publisher": "Microsoft.Compute",
@@ -57,7 +57,7 @@
     },
     {
       "type": "Microsoft.Compute/virtualMachines/extensions",
-      "name": "[concat(parameters('vmName'), copyIndex(),'/IaaSAntiMalware')]",
+      "name": "[concat(parameters('namePrefix'), copyIndex(),'/IaaSAntiMalware')]",
       "apiVersion": "2016-04-30-preview",
       "location": "[resourceGroup().location]",
       "copy": {
@@ -65,7 +65,7 @@
         "count": "[parameters('count')]"
       },
       "dependsOn": [
-        "[concat('Microsoft.Compute/virtualMachines/', concat(parameters('vmName'), copyIndex()))]"
+        "[concat('Microsoft.Compute/virtualMachines/', concat(parameters('namePrefix'), copyIndex()))]"
       ],
       "properties": {
         "publisher": "Microsoft.Azure.Security",
