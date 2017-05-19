@@ -14,12 +14,6 @@
     "domainPassword": {
       "type": "string"
     },
-    "localUsername": {
-      "type": "string"
-    },
-    "localPassword": {
-      "type": "securestring"
-    },
     "count": {
       "type": "int",
       "defaultValue": 2
@@ -453,10 +447,10 @@
 						"value": "[parameters('dnsServerName')]"
 					},
 					"sqlServerServiceAccountUserName": {
-						"value": "[parameters('sqlServerServiceAccountUserName')]"
+						"value": "[parameters('localUsername')]"
 					},
 					"sqlServerServiceAccountPassword": {
-						"value": "[parameters('sqlServerServiceAccountPassword')]"
+						"value": "[parameters('localPassword')]"
 					},
 					"_artifactsLocation": {
 						"value": "[parameters('_artifactsLocation')]"

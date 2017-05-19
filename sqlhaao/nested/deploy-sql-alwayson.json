@@ -82,14 +82,14 @@
               "password": "PrivateSettingsRef:adminPassword"
             },
             "sqlServiceCreds": {
-              "userName": "bigadmin",
-              "password": "PrivateSettingsRef:adminPassword"
+              "userName": "[parameters('sqlServerServiceAccountUserName')]",
+              "password": "PrivateSettingsRef:sqlServerServiceAccountPassword"
             }
           }
         },
         "protectedSettings": {
           "items": {
-            "adminPassword": "realbig",
+            "adminPassword": "[parameters('domainPassword')]",
             "sqlServerServiceAccountPassword": "[parameters('sqlServerServiceAccountPassword')]"
           }
         }
@@ -134,14 +134,14 @@
               "password": "PrivateSettingsRef:adminPassword"
             },
             "sqlServiceCreds": {
-              "userName": "bigadmin",
-              "password": "PrivateSettingsRef:adminPassword"
+              "userName": "[parameters('sqlServerServiceAccountUserName')]",
+              "password": "PrivateSettingsRef:sqlServerServiceAccountPassword"
             }
           }
         },
         "protectedSettings": {
           "items": {
-            "adminPassword": "realbig",
+            "adminPassword": "[parameters('domainPassword')]",
             "sqlServerServiceAccountPassword": "[parameters('sqlServerServiceAccountPassword')]"
           }
         }
