@@ -142,7 +142,7 @@
     {
       "name": "[variables('deploySqlCluster')]",
       "type": "Microsoft.Resources/deployments",
-      "apiVersion": "2015-06-15",
+      "apiVersion": "2015-06-01",
       "dependsOn": [],
       "properties": {
         "mode": "Incremental",
