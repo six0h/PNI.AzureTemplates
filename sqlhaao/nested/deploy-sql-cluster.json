@@ -98,7 +98,6 @@
 		"sqlWitnessSharePath": "[parameters('namePrefix')]",
     "sqlWitnessVMName": "[parameters('namePrefix')]",
 		"deploySqlAlwaysOn": "deploySqlAlwaysOn",
-    "deployDomainJoin": "deployDomainJoin",
 		"deploySqlAlwaysOnTemplateUrl": "[concat(parameters('_artifactsLocation'),'/nested/deploy-sql-alwayson.json',parameters('_artifactsLocationSasToken'))]",
     "sqlAOEPName": "[concat(parameters('namePrefix'), 'aoep')]",
 		"sqlAOAGName1": "[concat(parameters('namePrefix'), 'aoag')]",
@@ -378,7 +377,7 @@
 			"type": "Microsoft.Resources/deployments",
       "dependsOn": [
         "[resourceId('Microsoft.Compute/virtualMachines',concat(parameters('namePrefix'),'0'))]",
-        "[resourceId('Microsoft.Compute/virtualMachines',concat(parameters('namePrefix'),'1'))]",
+        "[resourceId('Microsoft.Compute/virtualMachines',concat(parameters('namePrefix'),'1'))]"
       ],
       "properties": {
         "mode": "Incremental",
