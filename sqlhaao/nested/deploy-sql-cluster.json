@@ -160,7 +160,7 @@
 				],
 				"loadBalancingRules": [
 					{
-						"name": "[variables('sqlAOListener1')]",
+            "name": "[variables('sqlAOListener1')]",
 						"properties": {
 							"frontendIPConfiguration": {
 								"id": "[variables('sqlLBFEConfigID1')]"
