@@ -313,56 +313,56 @@
         }
       }
     },
-		{
-			"apiVersion": "2015-06-15",
-			"type": "Microsoft.Compute/virtualMachines",
-			"name": "[variables('sqlWitnessVMName')]",
-			"location": "[resourceGroup().location]",
+    {
+      "apiVersion": "2015-06-15",
+      "type": "Microsoft.Compute/virtualMachines",
+      "name": "[variables('sqlWitnessVMName')]",
+      "location": "[resourceGroup().location]",
       "dependsOn": [
         "[resourceId('Microsoft.Storage/storageAccounts',variables('sqlWitnessStorageAccountName'))]",
         "[resourceId('Microsoft.Network/networkInterfaces',concat(variables('sqlWitnessVMName')))]",
         "[resourceId('Microsoft.Compute/availabilitySets', variables('sqlAvailabilitySetName'))]"
       ],
-			"properties": {
-				"hardwareProfile": {
-					"vmSize": "[parameters('SqlWitnessVMSize')]"
-				},
-				"availabilitySet": {
-					"id": "[resourceId('Microsoft.Compute/availabilitySets', variables('sqlAvailabilitySetName'))]"
-				},
-				"osProfile": {
-					"computerName": "[variables('sqlWitnessVMName')]",
-					"adminUsername": "[parameters('sqlServerServiceAccountUserName')]",
+      "properties": {
+        "hardwareProfile": {
+          "vmSize": "[parameters('SqlWitnessVMSize')]"
+        },
+        "availabilitySet": {
+          "id": "[resourceId('Microsoft.Compute/availabilitySets', variables('sqlAvailabilitySetName'))]"
+        },
+        "osProfile": {
+          "computerName": "[variables('sqlWitnessVMName')]",
+          "adminUsername": "[parameters('sqlServerServiceAccountUserName')]",
           "adminPassword": "[parameters('sqlServerServiceAccountPassword')]"
-				},
-				"storageProfile": {
-					"imageReference": {
-						"publisher": "[parameters('windowsImagePublisher')]",
-						"offer": "[parameters('windowsImageOffer')]",
+        },
+        "storageProfile": {
+          "imageReference": {
+            "publisher": "[parameters('windowsImagePublisher')]",
+            "offer": "[parameters('windowsImageOffer')]",
             "sku": "[parameters('windowsImageSKU')]",
-						"version": "[parameters('windowsImageVersion')]"
-					},
-					"osDisk": {
-						"name": "[concat(variables('sqlWitnessVMName'), 'os.vhd')]",
-						"vhd": {
+            "version": "[parameters('windowsImageVersion')]"
+          },
+          "osDisk": {
+            "name": "[concat(variables('sqlWitnessVMName'), 'os.vhd')]",
+            "vhd": {
               "uri": "[concat(reference(concat('Microsoft.Storage/storageAccounts/',variables('sqlWitnessStorageAccountName')),variables('apiVersionStorage')).primaryEndpoints.blob, variables('vmContainerName'), '/', variables('sqlWitnessVMName'), 'os.vhd')]"
-						},
-						"caching": "ReadWrite",
-						"createOption": "FromImage"
-					},
-					"dataDisks": [
-						{
-							"vhd": {
+            },
+            "caching": "ReadWrite",
+            "createOption": "FromImage"
+          },
+          "dataDisks": [
+            {
+              "vhd": {
                 "uri": "[concat(reference(concat('Microsoft.Storage/storageAccounts/',variables('sqlWitnessStorageAccountName')),variables('apiVersionStorage')).primaryEndpoints.blob, variables('vmContainerName'), '/', variables('sqlWitnessVMName'), 'st.vhd')]"
-							},
+              },
               "name": "[concat(variables('sqlWitnessVMName'), 'st.vhd')]",
-							"caching": "None",
-							"createOption": "Empty",
-							"diskSizeGB": "[variables('sqlWitnessDiskSize')]",
-							"lun": 0
-						}
-					]
-				},
+              "caching": "None",
+              "createOption": "Empty",
+              "diskSizeGB": "[variables('sqlWitnessDiskSize')]",
+              "lun": 0
+            }
+          ]
+        },
         "networkProfile": {
           "networkInterfaces": [
             {
@@ -370,11 +370,12 @@
             }
           ]
         }
-			}
-		},
+      }
+    },
     {
       "name": "[concat(parameters('namePrefix'),'jd')]",
 			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2015-01-01",
       "dependsOn": [
         "[resourceId('Microsoft.Compute/virtualMachines',concat(parameters('namePrefix'),'0'))]",
         "[resourceId('Microsoft.Compute/virtualMachines',concat(parameters('namePrefix'),'1'))]"
