@@ -55,7 +55,7 @@
     {
       "type": "Microsoft.Compute/virtualMachines/extensions",
       "name": "[concat(parameters('namePrefix'), copyIndex(),'/IaaSAntiMalware')]",
-      "apiVersion": "2016-04-30-preview",
+      "apiVersion": "2015-06-15",
       "location": "[resourceGroup().location]",
       "copy": {
         "name": "malcopy",
