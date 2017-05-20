@@ -374,9 +374,9 @@
 			}
 		},
     {
+			"apiVersion": "2015-01-01",
       "name": "[variables('deployDomainJoin')]",
 			"type": "Microsoft.Resources/deployments",
-			"apiVersion": "2015-01-01",
       "dependsOn": [],
       "properties": {
         "mode": "Incremental",
