@@ -373,7 +373,7 @@
 			}
 		},
     {
-      "name": "[concat(parameters('namePrefix'),'jd')",
+      "name": "[concat(parameters('namePrefix'),'jd')]",
 			"type": "Microsoft.Resources/deployments",
       "dependsOn": [
         "[resourceId('Microsoft.Compute/virtualMachines',concat(parameters('namePrefix'),'0'))]",
