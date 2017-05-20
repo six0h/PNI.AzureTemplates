@@ -373,9 +373,9 @@
       }
     },
     {
+      "apiVersion": "2017-05-10",
       "name": "[concat(parameters('namePrefix'),'jd')]",
       "type": "Microsoft.Resources/deployments",
-      "apiVersion": "2015-06-15",
       "dependsOn": [
         "[resourceId('Microsoft.Compute/virtualMachines',concat(parameters('namePrefix'),'0'))]",
         "[resourceId('Microsoft.Compute/virtualMachines',concat(parameters('namePrefix'),'1'))]"
