@@ -374,10 +374,12 @@
 			}
 		},
     {
-			"apiVersion": "2015-01-01",
       "name": "[variables('deployDomainJoin')]",
 			"type": "Microsoft.Resources/deployments",
-      "dependsOn": [],
+      "dependsOn": [
+        "[resourceId('Microsoft.Compute/virtualMachines',concat(parameters('namePrefix'),'0'))]",
+        "[resourceId('Microsoft.Compute/virtualMachines',concat(parameters('namePrefix'),'1'))]",
+      ],
       "properties": {
         "mode": "Incremental",
         "templateLink": {

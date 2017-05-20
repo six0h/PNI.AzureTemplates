@@ -35,9 +35,6 @@
         "name": "extcopy",
         "count": "[parameters('count')]"
       },
-      "dependsOn": [
-        "[concat('Microsoft.Compute/virtualMachines/', concat(parameters('namePrefix'), copyIndex()))]"
-      ],
       "properties": {
         "publisher": "Microsoft.Compute",
         "type": "JsonADDomainExtension",
