@@ -61,9 +61,6 @@
         "name": "malcopy",
         "count": "[parameters('count')]"
       },
-      "dependsOn": [
-        "[concat('Microsoft.Compute/virtualMachines/', concat(parameters('namePrefix'), copyIndex()))]"
-      ],
       "properties": {
         "publisher": "Microsoft.Azure.Security",
         "type": "IaaSAntimalware",
