@@ -27,7 +27,7 @@
   },
   "resources": [
     {
-      "apiVersion": "2015-06-15",
+      "apiVersion": "2017-05-10",
       "type": "Microsoft.Compute/virtualMachines/extensions",
       "name": "[concat(parameters('namePrefix'), copyIndex(),'/joindomain')]",
       "location": "[resourceGroup().location]",
@@ -55,7 +55,7 @@
     {
       "type": "Microsoft.Compute/virtualMachines/extensions",
       "name": "[concat(parameters('namePrefix'), copyIndex(),'/IaaSAntiMalware')]",
-      "apiVersion": "2015-06-15",
+      "apiVersion": "2017-05-10",
       "location": "[resourceGroup().location]",
       "copy": {
         "name": "malcopy",
