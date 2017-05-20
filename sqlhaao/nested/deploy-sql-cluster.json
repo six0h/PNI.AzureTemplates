@@ -241,7 +241,7 @@
 			}
 		},
     {
-      "apiVersion": "2017-05-10",
+      "apiVersion": "2016-09-01",
       "type": "Microsoft.Compute/virtualMachines",
       "name": "[concat(parameters('namePrefix'), copyindex())]",
       "location": "[resourceGroup().location]",
@@ -314,7 +314,7 @@
       }
     },
     {
-      "apiVersion": "2017-05-10",
+      "apiVersion": "2016-09-01",
       "type": "Microsoft.Compute/virtualMachines",
       "name": "[variables('sqlWitnessVMName')]",
       "location": "[resourceGroup().location]",
@@ -373,7 +373,7 @@
       }
     },
     {
-      "apiVersion": "2017-05-10",
+      "apiVersion": "2016-09-01",
       "name": "[concat(parameters('namePrefix'),'jd')]",
       "type": "Microsoft.Resources/deployments",
       "dependsOn": [
