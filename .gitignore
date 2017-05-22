@@ -4,3 +4,7 @@
 
 /.vs
 /2016sql
+/sqlhaao/dsc/prepare-sql-alwayson-server.ps1
+/sqlhaao/dsc/prepare-sql-alwayson-server.ps1.zip.bak
+/sqlhaao/dsc/create-file-share-witness.ps1
+/sqlhaao/dsc/create-failover-cluster.ps1
