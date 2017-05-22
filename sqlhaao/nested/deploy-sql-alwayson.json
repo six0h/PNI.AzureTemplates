@@ -14,6 +14,9 @@
     "namePrefix": {
       "type": "string"
     },
+    "ouPath": {
+      "type": "string"
+    },
     "sharePath": {
       "type": "string"
     },
@@ -76,6 +79,7 @@
           "configurationFunction": "[variables('sqlAOPrepareConfigurationFunction')]",
           "properties": {
             "domainName": "[parameters('domainName')]",
+            "ouPath": "[parameters('ouPath')]",
             "sqlAlwaysOnEndpointName": "[parameters('sqlAlwaysOnEndpointName')]",
             "adminCreds": {
               "userName": "[parameters('domainUsername')]",
@@ -114,6 +118,7 @@
           "configurationFunction": "[variables('createClusterConfigurationFunction')]",
           "properties": {
             "domainName": "[parameters('domainName')]",
+            "ouPath": "[parameters('ouPath')]",
             "clusterName": "[variables('clusterName')]",
             "sharePath": "[concat('\\\\',parameters('sqlWitnessVMName'),'\\',parameters('sharePath'))]",
             "nodes": [

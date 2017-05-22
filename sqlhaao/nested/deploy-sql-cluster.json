@@ -1,6 +1,7 @@
 {
   "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
-	"contentVersion": "1.0.0.0",
+  "contentVersion": "1.0.0.0",
+  "outputs": {},
   "parameters": {
     "_artifactsLocation": {
       "type": "string"
@@ -8,26 +9,23 @@
     "_artifactsLocationSasToken": {
       "type": "string"
     },
-    "domainUsername": {
-      "type": "string"
+    "count": {
+      "type": "int",
+      "defaultValue": 2
     },
-    "domainPassword": {
+    "domainName": {
       "type": "string"
     },
     "domainOptions": {
       "type": "int"
     },
-    "ouPath": {
+    "domainPassword": {
       "type": "string"
     },
-    "count": {
-      "type": "int",
-      "defaultValue": 2
+    "domainUsername": {
+      "type": "string"
     },
     "existingAdPDCVMName": {
-      "type": "string"
-    },
-    "domainName": {
       "type": "string"
     },
     "lbSubnetUri": {
@@ -37,6 +35,9 @@
       "type": "string"
     },
     "nicSubnetUri": {
+      "type": "string"
+    },
+    "ouPath": {
       "type": "string"
     },
     "sqlLBIPAddress": {
@@ -74,56 +75,56 @@
       "defaultValue": "latest"
     }
   },
-	"variables": {
-		"apiVersionStorage": "2015-06-15",
-		"sqlDiskSize": 1000,
-		"sqlWitnessDiskSize": 128,
-		"sqlAvailabilitySetName": "[concat(parameters('namePrefix'),'av')]",
+  "variables": {
+    "apiVersionStorage": "2015-06-15",
+    "sqlDiskSize": 1000,
+    "sqlWitnessDiskSize": 128,
+    "sqlAvailabilitySetName": "[concat(parameters('namePrefix'),'av')]",
     "sqlLBName": "[concat(parameters('namePrefix'),'li')]",
-		"sqllbID": "[resourceId('Microsoft.Network/loadBalancers',variables('sqlLBName'))]",
-		"lbFE1": "[concat(parameters('namePrefix'),'fe1')]",
-		"lbBE": "[concat(parameters('namePrefix'),'be')]",
+    "sqllbID": "[resourceId('Microsoft.Network/loadBalancers',variables('sqlLBName'))]",
+    "lbFE1": "[concat(parameters('namePrefix'),'fe1')]",
+    "lbBE": "[concat(parameters('namePrefix'),'be')]",
     "sqlLBID": "[resourceId('Microsoft.Network/loadBalancers',variables('sqlLBName'))]",
-		"sqlLBFEConfigID1": "[concat(variables('sqllbID'),'/frontendIPConfigurations/',variables('lbFE1'))]",
-		"sqlLBBEAddressPoolID": "[concat(variables('sqllbID'),'/backendAddressPools/',variables('lbBE'))]",
-		"sqlAOProbe1": "[concat(parameters('namePrefix'),'hb')]",
-		"sqlLBProbeID1": "[concat(variables('sqllbID'),'/probes/',variables('sqlAOProbe1'))]",
+    "sqlLBFEConfigID1": "[concat(variables('sqllbID'),'/frontendIPConfigurations/',variables('lbFE1'))]",
+    "sqlLBBEAddressPoolID": "[concat(variables('sqllbID'),'/backendAddressPools/',variables('lbBE'))]",
+    "sqlAOProbe1": "[concat(parameters('namePrefix'),'hb')]",
+    "sqlLBProbeID1": "[concat(variables('sqllbID'),'/probes/',variables('sqlAOProbe1'))]",
     "sqlStorageAccountPrefix": "[parameters('namePrefix')]",
     "sqlWitnessStorageAccountName": "[concat(parameters('namePrefix'),'w')]",
-		"vmContainerName": "vhds",
-		"deploySqlWitnessShare": "deploySqlWitnessShare",
-		"deploySqlWitnessShareId": "[concat('Microsoft.Resources/deployments/', variables('deploySqlWitnessShare'))]",
-		"deploySqlWitnessShareTemplateUrl": "[concat(parameters('_artifactsLocation'),'/nested/deploy-sql-witness.json',parameters('_artifactsLocationSasToken'))]",
+    "vmContainerName": "vhds",
+    "deploySqlWitnessShare": "deploySqlWitnessShare",
+    "deploySqlWitnessShareId": "[concat('Microsoft.Resources/deployments/', variables('deploySqlWitnessShare'))]",
+    "deploySqlWitnessShareTemplateUrl": "[concat(parameters('_artifactsLocation'),'/nested/deploy-sql-witness.json',parameters('_artifactsLocationSasToken'))]",
     "deploySqlJoinAdTemplateUrl": "[concat(parameters('_artifactsLocation'),'/nested/deploy-sql-joinad.json',parameters('_artifactsLocationSasToken'))]",
-		"sqlWitnessSharePath": "[parameters('namePrefix')]",
+    "sqlWitnessSharePath": "[parameters('namePrefix')]",
     "sqlWitnessVMName": "[parameters('namePrefix')]",
-		"deploySqlAlwaysOn": "deploySqlAlwaysOn",
-		"deploySqlAlwaysOnTemplateUrl": "[concat(parameters('_artifactsLocation'),'/nested/deploy-sql-alwayson.json',parameters('_artifactsLocationSasToken'))]",
+    "deploySqlAlwaysOn": "deploySqlAlwaysOn",
+    "deploySqlAlwaysOnTemplateUrl": "[concat(parameters('_artifactsLocation'),'/nested/deploy-sql-alwayson.json',parameters('_artifactsLocationSasToken'))]",
     "sqlAOEPName": "[concat(parameters('namePrefix'), 'aoep')]",
-		"sqlAOAGName1": "[concat(parameters('namePrefix'), 'aoag')]",
+    "sqlAOAGName1": "[concat(parameters('namePrefix'), 'aoag')]",
     "sqlAOListener1": "[concat(parameters('namePrefix'), 'aol')]"
-	},
-	"resources": [
-		{
-			"type": "Microsoft.Compute/availabilitySets",
-			"name": "[variables('sqlAvailabilitySetName')]",
-			"apiVersion": "2015-06-15",
-			"location": "[resourceGroup().location]",
-			"properties": {}
-		},
-		{
-			"type": "Microsoft.Storage/storageAccounts",
-			"name": "[concat(variables('sqlStorageAccountPrefix'), copyindex())]",
-			"apiVersion": "2015-06-15",
-			"copy": {
-				"name": "storageAccountLoop",
-				"count": "[parameters('count')]"
-			},
-			"location": "[resourceGroup().location]",
-			"properties": {
-				"accountType": "[parameters('storageAccountType')]"
-			}
-		},
+  },
+  "resources": [
+    {
+      "type": "Microsoft.Compute/availabilitySets",
+      "name": "[variables('sqlAvailabilitySetName')]",
+      "apiVersion": "2015-06-15",
+      "location": "[resourceGroup().location]",
+      "properties": {}
+    },
+    {
+      "type": "Microsoft.Storage/storageAccounts",
+      "name": "[concat(variables('sqlStorageAccountPrefix'), copyindex())]",
+      "apiVersion": "2015-06-15",
+      "copy": {
+        "name": "storageAccountLoop",
+        "count": "[parameters('count')]"
+      },
+      "location": "[resourceGroup().location]",
+      "properties": {
+        "accountType": "[parameters('storageAccountType')]"
+      }
+    },
     {
       "type": "Microsoft.Storage/storageAccounts",
       "name": "[variables('sqlWitnessStorageAccountName')]",
@@ -133,113 +134,113 @@
         "accountType": "[parameters('storageAccountType')]"
       }
     },
-		{
-			"apiVersion": "2015-06-15",
-			"name": "[variables('sqlLBName')]",
-			"type": "Microsoft.Network/loadBalancers",
+    {
+      "apiVersion": "2015-06-15",
+      "name": "[variables('sqlLBName')]",
+      "type": "Microsoft.Network/loadBalancers",
       "location": "[resourceGroup().location]",
-			"dependsOn": [],
-			"properties": {
-				"frontendIPConfigurations": [
-					{
-						"name": "[variables('lbFE1')]",
-						"properties": {
-							"privateIPAllocationMethod": "Static",
-							"privateIPAddress": "[parameters('sqlLBIPAddress')]",
-							"subnet": {
-								"id": "[parameters('lbSubnetUri')]"
-							}
-						}
-					}
-				],
-				"backendAddressPools": [
-					{
+      "dependsOn": [],
+      "properties": {
+        "frontendIPConfigurations": [
+          {
+            "name": "[variables('lbFE1')]",
+            "properties": {
+              "privateIPAllocationMethod": "Static",
+              "privateIPAddress": "[parameters('sqlLBIPAddress')]",
+              "subnet": {
+                "id": "[parameters('lbSubnetUri')]"
+              }
+            }
+          }
+        ],
+        "backendAddressPools": [
+          {
             "name": "[variables('lbBE')]"
-					}
-				],
-				"loadBalancingRules": [
-					{
+          }
+        ],
+        "loadBalancingRules": [
+          {
             "name": "[variables('sqlAOListener1')]",
-						"properties": {
-							"frontendIPConfiguration": {
-								"id": "[variables('sqlLBFEConfigID1')]"
-							},
-							"backendAddressPool": {
-								"id": "[variables('sqlLBBEAddressPoolID')]"
-							},
-							"probe": {
-								"id": "[variables('sqlLBProbeID1')]"
-							},
-							"protocol": "Tcp",
-							"frontendPort": 1433,
-							"backendPort": 1433,
-							"enableFloatingIP": true
-						}
-					}
-				],
-				"probes": [
-					{
-						"name": "[variables('sqlAOProbe1')]",
-						"properties": {
-							"protocol": "Tcp",
-							"port": 59999,
-							"intervalInSeconds": 5,
-							"numberOfProbes": 2
-						}
-					}
-				]
-			}
-		},
-		{
+            "properties": {
+              "frontendIPConfiguration": {
+                "id": "[variables('sqlLBFEConfigID1')]"
+              },
+              "backendAddressPool": {
+                "id": "[variables('sqlLBBEAddressPoolID')]"
+              },
+              "probe": {
+                "id": "[variables('sqlLBProbeID1')]"
+              },
+              "protocol": "Tcp",
+              "frontendPort": 1433,
+              "backendPort": 1433,
+              "enableFloatingIP": true
+            }
+          }
+        ],
+        "probes": [
+          {
+            "name": "[variables('sqlAOProbe1')]",
+            "properties": {
+              "protocol": "Tcp",
+              "port": 59999,
+              "intervalInSeconds": 5,
+              "numberOfProbes": 2
+            }
+          }
+        ]
+      }
+    },
+    {
       "name": "[concat(parameters('namePrefix'), copyindex())]",
-			"type": "Microsoft.Network/networkInterfaces",
-			"location": "[resourceGroup().location]",
-			"apiVersion": "2015-06-15",
-			"copy": {
-				"name": "nicLoop",
+      "type": "Microsoft.Network/networkInterfaces",
+      "location": "[resourceGroup().location]",
+      "apiVersion": "2015-06-15",
+      "copy": {
+        "name": "nicLoop",
         "count": "[parameters('count')]"
-			},
-			"dependsOn": [
-				"[variables('sqlLBID')]"
-			],
-			"properties": {
-				"ipConfigurations": [
-					{
-						"name": "ipconfig1",
-						"properties": {
-							"privateIPAllocationMethod": "Dynamic",
-							"subnet": {
-								"id": "[parameters('nicSubnetUri')]"
-							},
-							"loadBalancerBackendAddressPools": [
-								{
-									"id": "[variables('sqlLBBEAddressPoolID')]"
-								}
-							]
-						}
-					}
-				]
-			}
-		},
-		{
+      },
+      "dependsOn": [
+        "[variables('sqlLBID')]"
+      ],
+      "properties": {
+        "ipConfigurations": [
+          {
+            "name": "ipconfig1",
+            "properties": {
+              "privateIPAllocationMethod": "Dynamic",
+              "subnet": {
+                "id": "[parameters('nicSubnetUri')]"
+              },
+              "loadBalancerBackendAddressPools": [
+                {
+                  "id": "[variables('sqlLBBEAddressPoolID')]"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
       "name": "[concat(variables('sqlWitnessVMName'))]",
-			"type": "Microsoft.Network/networkInterfaces",
-			"location": "[resourceGroup().location]",
-			"apiVersion": "2015-06-15",
-			"properties": {
-				"ipConfigurations": [
-					{
-						"name": "ipconfig1",
-						"properties": {
-							"privateIPAllocationMethod": "Dynamic",
-							"subnet": {
-								"id": "[parameters('nicSubnetUri')]"
-							}
-						}
-					}
-				]
-			}
-		},
+      "type": "Microsoft.Network/networkInterfaces",
+      "location": "[resourceGroup().location]",
+      "apiVersion": "2015-06-15",
+      "properties": {
+        "ipConfigurations": [
+          {
+            "name": "ipconfig1",
+            "properties": {
+              "privateIPAllocationMethod": "Dynamic",
+              "subnet": {
+                "id": "[parameters('nicSubnetUri')]"
+              }
+            }
+          }
+        ]
+      }
+    },
     {
       "apiVersion": "2015-06-15",
       "type": "Microsoft.Compute/virtualMachines",
@@ -372,23 +373,23 @@
         }
       }
     },
-		{
-			"name": "[variables('deploySqlWitnessShare')]",
-			"type": "Microsoft.Resources/deployments",
+    {
+      "name": "[variables('deploySqlWitnessShare')]",
+      "type": "Microsoft.Resources/deployments",
       "apiVersion": "2016-09-01",
-			"dependsOn": [
-				"[resourceId('Microsoft.Compute/virtualMachines',variables('sqlWitnessVMName'))]"
-			],
-			"properties": {
+      "dependsOn": [
+        "[resourceId('Microsoft.Compute/virtualMachines',variables('sqlWitnessVMName'))]"
+      ],
+      "properties": {
         "mode": "Incremental",
-				"templateLink": {
-					"uri": "[variables('deploySqlWitnessShareTemplateUrl')]",
-					"contentVersion": "1.0.0.0"
-				},
-				"parameters": {
-					"sqlWitnessVMName": {
-						"value": "[variables('sqlWitnessVMName')]"
-					},
+        "templateLink": {
+          "uri": "[variables('deploySqlWitnessShareTemplateUrl')]",
+          "contentVersion": "1.0.0.0"
+        },
+        "parameters": {
+          "sqlWitnessVMName": {
+            "value": "[variables('sqlWitnessVMName')]"
+          },
           "domainName": {
             "value": "[parameters('domainName')]"
           },
@@ -398,85 +399,90 @@
           "domainPassword": {
             "value": "[parameters('domainPassword')]"
           },
-					"sharePath": {
+          "ouPath": {
+            "value": "[parameters('ouPath')]"
+          },
+          "sharePath": {
             "value": "[variables('sqlWitnessSharePath')]"
-					},
-					"_artifactsLocation": {
-						"value": "[parameters('_artifactsLocation')]"
-					},
-					"_artifactsLocationSasToken": {
-						"value": "[parameters('_artifactsLocationSasToken')]"
-					}
-				}
-			}
-		},
-		{
-			"name": "[variables('deploySqlAlwaysOn')]",
-			"type": "Microsoft.Resources/deployments",
-      "apiVersion": "2016-09-01",
-			"dependsOn": [
-        "[resourceId('Microsoft.Compute/virtualMachines',concat(parameters('namePrefix'),'0'))]",
-        "[resourceId('Microsoft.Compute/virtualMachines',concat(parameters('namePrefix'),'1'))]",
-				"[variables('deploySqlWitnessShareId')]"
-			],
-			"properties": {
-				"mode": "Incremental",
-				"templateLink": {
-          "uri": "[variables('deploySqlAlwaysOnTemplateUrl')]",
-					"contentVersion": "1.0.0.0"
-				},
-				"parameters": {
-					"domainName": {
-						"value": "[parameters('domainName')]"
-					},
-					"domainUsername": {
-						"value": "[parameters('domainUsername')]"
-					},
-					"domainPassword": {
-						"value": "[parameters('domainPassword')]"
-					},
-					"namePrefix": {
-						"value": "[parameters('namePrefix')]"
-					},
-					"sharePath": {
-						"value": "[variables('sqlWitnessSharePath')]"
-					},
-          "sqlWitnessVMName": {
-            "value": "[variables('sqlWitnessVMName')]"
           },
-					"sqlLBName": {
-						"value": "[variables('sqlLBName')]"
-					},
-					"sqlLBIPAddress": {
-						"value": "[parameters('sqlLBIPAddress')]"
-					},
-          "existingAdPDCVMName": {
-            "value": "[parameters('existingAdPDCVMName')]"
-          },
-					"sqlServerServiceAccountUserName": {
-						"value": "[parameters('sqlServerServiceAccountUserName')]"
-					},
-					"sqlServerServiceAccountPassword": {
-            "value": "[parameters('sqlServerServiceAccountPassword')]"
-					},
           "_artifactsLocation": {
             "value": "[parameters('_artifactsLocation')]"
           },
-					"_artifactsLocationSasToken": {
-						"value": "[parameters('_artifactsLocationSasToken')]"
-					},
-					"sqlAlwaysOnEndpointName": {
-						"value": "[variables('sqlAOEPName')]"
-					},
-					"sqlAlwaysOnAvailabilityGroupName1": {
-						"value": "[variables('sqlAOAGName1')]"
-					},
-					"sqlAlwaysOnAvailabilityGroupListenerName1": {
-						"value": "[variables('sqlAOListener1')]"
-					}
-				}
-			}
-		}
-	],
-	"outputs": {}
+          "_artifactsLocationSasToken": {
+            "value": "[parameters('_artifactsLocationSasToken')]"
+          }
+        }
+      }
+    },
+    {
+      "name": "[variables('deploySqlAlwaysOn')]",
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2016-09-01",
+      "dependsOn": [
+        "[resourceId('Microsoft.Compute/virtualMachines',concat(parameters('namePrefix'),'0'))]",
+        "[resourceId('Microsoft.Compute/virtualMachines',concat(parameters('namePrefix'),'1'))]",
+        "[variables('deploySqlWitnessShareId')]"
+      ],
+      "properties": {
+        "mode": "Incremental",
+        "templateLink": {
+          "uri": "[variables('deploySqlAlwaysOnTemplateUrl')]",
+          "contentVersion": "1.0.0.0"
+        },
+        "parameters": {
+          "domainName": {
+            "value": "[parameters('domainName')]"
+          },
+          "domainUsername": {
+            "value": "[parameters('domainUsername')]"
+          },
+          "domainPassword": {
+            "value": "[parameters('domainPassword')]"
+          },
+          "namePrefix": {
+            "value": "[parameters('namePrefix')]"
+          },
+          "ouPath": {
+            "value": "[parameters('ouPath')]"
+          },
+          "sharePath": {
+            "value": "[variables('sqlWitnessSharePath')]"
+          },
+          "sqlWitnessVMName": {
+            "value": "[variables('sqlWitnessVMName')]"
+          },
+          "sqlLBName": {
+            "value": "[variables('sqlLBName')]"
+          },
+          "sqlLBIPAddress": {
+            "value": "[parameters('sqlLBIPAddress')]"
+          },
+          "existingAdPDCVMName": {
+            "value": "[parameters('existingAdPDCVMName')]"
+          },
+          "sqlServerServiceAccountUserName": {
+            "value": "[parameters('sqlServerServiceAccountUserName')]"
+          },
+          "sqlServerServiceAccountPassword": {
+            "value": "[parameters('sqlServerServiceAccountPassword')]"
+          },
+          "_artifactsLocation": {
+            "value": "[parameters('_artifactsLocation')]"
+          },
+          "_artifactsLocationSasToken": {
+            "value": "[parameters('_artifactsLocationSasToken')]"
+          },
+          "sqlAlwaysOnEndpointName": {
+            "value": "[variables('sqlAOEPName')]"
+          },
+          "sqlAlwaysOnAvailabilityGroupName1": {
+            "value": "[variables('sqlAOAGName1')]"
+          },
+          "sqlAlwaysOnAvailabilityGroupListenerName1": {
+            "value": "[variables('sqlAOListener1')]"
+          }
+        }
+      }
+    }
+  ]
 }
