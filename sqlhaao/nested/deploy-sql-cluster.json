@@ -374,6 +374,35 @@
       }
     },
     {
+      "name": "DeployJoinAD",
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2016-09-01",
+      "dependsOn": [
+        "[resourceId('Microsoft.Compute/virtualMachines',variables('sqlWitnessVMName'))]"
+      ],
+      "properties": {
+        "mode": "Incremental",
+        "templateLink": {
+          "uri": "[variables('deploySqlWitnessShareTemplateUrl')]",
+          "contentVersion": "1.0.0.0"
+        },
+        "parameters": {
+          "domainName": {
+            "value": "[parameters('domainName')]"
+          },
+          "domainUsername": {
+            "value": "[parameters('domainUsername')]"
+          },
+          "domainPassword": {
+            "value": "[parameters('domainPassword')]"
+          },
+          "ouPath": {
+            "value": "[parameters('ouPath')]"
+          }
+        }
+      }
+    },
+    {
       "name": "[variables('deploySqlWitnessShare')]",
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "2016-09-01",
