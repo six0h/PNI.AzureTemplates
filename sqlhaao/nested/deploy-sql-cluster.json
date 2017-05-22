@@ -398,6 +398,15 @@
           },
           "ouPath": {
             "value": "[parameters('ouPath')]"
+          },
+          "count": {
+            "value": "[parameters('count')]"
+          },
+          "startCount": {
+            "value": 1
+          },
+          "namePrefix": {
+            "value": "[parameters('namePrefix')]"
           }
         }
       }
