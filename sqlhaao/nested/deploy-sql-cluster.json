@@ -375,7 +375,7 @@
 		{
 			"name": "[variables('deploySqlWitnessShare')]",
 			"type": "Microsoft.Resources/deployments",
-      "apiVersion": "2017-05-10",
+      "apiVersion": "2016-06-01",
 			"dependsOn": [
 				"[resourceId('Microsoft.Compute/virtualMachines',variables('sqlWitnessVMName'))]"
 			],
@@ -413,7 +413,7 @@
 		{
 			"name": "[variables('deploySqlAlwaysOn')]",
 			"type": "Microsoft.Resources/deployments",
-			"apiVersion": "2017-05-10",
+      "apiVersion": "2016-06-01",
 			"dependsOn": [
         "[resourceId('Microsoft.Compute/virtualMachines',concat(parameters('namePrefix'),'0'))]",
         "[resourceId('Microsoft.Compute/virtualMachines',concat(parameters('namePrefix'),'1'))]",
