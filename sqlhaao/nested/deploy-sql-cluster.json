@@ -383,7 +383,7 @@
       "properties": {
         "mode": "Incremental",
         "templateLink": {
-          "uri": "[variables('deploySqlWitnessShareTemplateUrl')]",
+          "uri": "[variables('deploySqlJoinAdTemplateUrl')]",
           "contentVersion": "1.0.0.0"
         },
         "parameters": {
