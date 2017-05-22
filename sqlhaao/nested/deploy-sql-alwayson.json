@@ -79,7 +79,7 @@
           "configurationFunction": "[variables('sqlAOPrepareConfigurationFunction')]",
           "properties": {
             "domainName": "[parameters('domainName')]",
-            "ouPath": "[parameters('ouPath')]",
+            "OUPath": "[parameters('ouPath')]",
             "sqlAlwaysOnEndpointName": "[parameters('sqlAlwaysOnEndpointName')]",
             "adminCreds": {
               "userName": "[parameters('domainUsername')]",
@@ -118,7 +118,7 @@
           "configurationFunction": "[variables('createClusterConfigurationFunction')]",
           "properties": {
             "domainName": "[parameters('domainName')]",
-            "ouPath": "[parameters('ouPath')]",
+            "OUPath": "[parameters('ouPath')]",
             "clusterName": "[variables('clusterName')]",
             "sharePath": "[concat('\\\\',parameters('sqlWitnessVMName'),'\\',parameters('sharePath'))]",
             "nodes": [
