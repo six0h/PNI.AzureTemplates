@@ -14,6 +14,9 @@
     "domainPassword": {
       "type": "securestring"
     },
+    "ouPath": {
+      "type": "string"
+    },
     "sharePath": {
       "type": "string"
     },
@@ -47,6 +50,7 @@
           "properties": {
             "domainName": "[parameters('domainName')]",
             "sharePath": "[parameters('sharePath')]",
+            "OUPath": "[parameters('ouPath')]",
             "adminCreds": {
               "userName": "[parameters('domainUsername')]",
               "password": "PrivateSettingsRef:adminPassword"
