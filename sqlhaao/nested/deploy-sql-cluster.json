@@ -372,45 +372,6 @@
         }
       }
     },
-    {
-      "apiVersion": "2017-05-10",
-      "name": "[concat(parameters('namePrefix'),'jd')]",
-      "type": "Microsoft.Resources/deployments",
-      "dependsOn": [
-        "[resourceId('Microsoft.Compute/virtualMachines',concat(parameters('namePrefix'),'0'))]",
-        "[resourceId('Microsoft.Compute/virtualMachines',concat(parameters('namePrefix'),'1'))]"
-      ],
-      "properties": {
-        "mode": "Incremental",
-        "templateLink": {
-          "uri": "[variables('deploySqlJoinAdTemplateUrl')]",
-          "contentVersion": "1.0.0.0"
-        },
-        "parameters": {
-          "count": {
-            "value": "[parameters('count')]"
-          },
-          "domainName": {
-            "value": "[parameters('domainName')]"
-          },
-          "domainUsername": {
-            "value": "[parameters('domainUsername')]"
-          },
-          "domainPassword": {
-            "value": "[parameters('domainPassword')]"
-          },
-          "domainOptions": {
-            "value": "[parameters('domainOptions')]"
-          },
-          "namePrefix": {
-            "value": "[parameters('namePrefix')]"
-          },
-          "ouPath": {
-            "value": "[parameters('ouPath')]"
-          }
-        }
-      }
-    },
 		{
 			"name": "[variables('deploySqlWitnessShare')]",
 			"type": "Microsoft.Resources/deployments",
