@@ -23,10 +23,11 @@
     },
     "ouPath": {
       "type": "string"
+    },
+    "startCount": {
+      "type": "int",
+      "defaultValue": 1
     }
-  },
-  "variables": {
-    "startCount": "[add(parameters('count'), copyIndex())]"
   },
   "resources": [
     {
@@ -89,7 +90,7 @@
     {
       "apiVersion": "2015-06-15",
       "type": "Microsoft.Compute/virtualMachines/extensions",
-      "name": "[concat(parameters('namePrefix'), variables('startCount'),'/joindomain')]",
+      "name": "[concat(parameters('namePrefix'), add(parameters('startCount'),parameters('count')),'/joindomain')]",
       "location": "[resourceGroup().location]",
       "copy": {
         "name": "extcopy",
@@ -114,7 +115,7 @@
     },
     {
       "type": "Microsoft.Compute/virtualMachines/extensions",
-      "name": "[concat(parameters('namePrefix'), variables('startCount'),'/IaaSAntiMalware')]",
+      "name": "[concat(parameters('namePrefix'), add(parameters('startCount'),parameters('count')),'/IaaSAntiMalware')]",
       "apiVersion": "2015-06-15",
       "location": "[resourceGroup().location]",
       "copy": {
