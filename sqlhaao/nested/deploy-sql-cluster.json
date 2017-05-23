@@ -439,18 +439,6 @@
           "sqlWitnessVMName": {
             "value": "[variables('sqlWitnessVMName')]"
           },
-          "domainName": {
-            "value": "[parameters('domainName')]"
-          },
-          "domainUsername": {
-            "value": "[parameters('domainUsername')]"
-          },
-          "domainPassword": {
-            "value": "[parameters('domainPassword')]"
-          },
-          "ouPath": {
-            "value": "[parameters('ouPath')]"
-          },
           "sharePath": {
             "value": "[variables('sqlWitnessSharePath')]"
           },
