@@ -90,7 +90,7 @@
             "OUPath": "[parameters('ouPath')]",
             "sqlAlwaysOnEndpointName": "[parameters('sqlAlwaysOnEndpointName')]",
             "adminCreds": {
-              "userName": "[parameters('domainUsername')]",
+              "userName": "[parameters('sqlAdmin')]",
               "password": "PrivateSettingsRef:adminPassword"
             },
             "sqlServiceCreds": {
@@ -101,7 +101,7 @@
         },
         "protectedSettings": {
           "items": {
-            "adminPassword": "[parameters('domainPassword')]",
+            "adminPassword": "[parameters('sqlPassword')]",
             "sqlServerServiceAccountPassword": "[parameters('sqlServerServiceAccountPassword')]"
           }
         }
@@ -143,7 +143,7 @@
             "secondaryReplica": "[concat(parameters('namePrefix'),'0')]",
             "existingAdPDCVMName": "[parameters('existingAdPDCVMName')]",
             "adminCreds": {
-              "userName": "[parameters('domainUsername')]",
+              "userName": "[parameters('sqlAdmin')]",
               "password": "PrivateSettingsRef:adminPassword"
             },
             "sqlServiceCreds": {
@@ -154,7 +154,7 @@
         },
         "protectedSettings": {
           "items": {
-            "adminPassword": "[parameters('domainPassword')]",
+            "adminPassword": "[parameters('sqlPassword')]",
             "sqlServerServiceAccountPassword": "[parameters('sqlServerServiceAccountPassword')]"
           }
         }
