@@ -96,7 +96,7 @@
     "sqlWitnessStorageAccountName": "[concat(parameters('namePrefix'),'w')]",
     "vmContainerName": "vhds",
     "deploySqlWitnessShare": "deploySqlWitnessShare",
-    "deploySqlWitnessShareId": "[concat('Microsoft.Resources/deployments/', variables('deploySqlWitnessShare'))]",
+    "deploySqlWitnessShareId": "[concat('Microsoft.Resources/deployments/', concat(variables('deploySqlWitnessShare'),'-',parameters('runTimestamp')))]",
     "deploySqlWitnessShareTemplateUrl": "[concat(parameters('_artifactsLocation'),'/nested/deploy-sql-witness.json',parameters('_artifactsLocationSasToken'))]",
     "deploySqlJoinAdTemplateUrl": "[concat(parameters('_artifactsLocation'),'/nested/deploy-sql-joinad.json',parameters('_artifactsLocationSasToken'))]",
     "sqlWitnessSharePath": "[parameters('namePrefix')]",
