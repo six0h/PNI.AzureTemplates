@@ -36,10 +36,6 @@
       "type": "Microsoft.Compute/virtualMachines/extensions",
       "name": "[concat(parameters('namePrefix'), '/joindomain')]",
       "location": "[resourceGroup().location]",
-      "copy": {
-        "name": "extcopy",
-        "count": "[parameters('count')]"
-      },
       "properties": {
         "publisher": "Microsoft.Compute",
         "type": "JsonADDomainExtension",
@@ -62,10 +58,6 @@
       "name": "[concat(parameters('namePrefix'), '/IaaSAntiMalware')]",
       "apiVersion": "2015-06-15",
       "location": "[resourceGroup().location]",
-      "copy": {
-        "name": "malcopy",
-        "count": "[parameters('count')]"
-      },
       "properties": {
         "publisher": "Microsoft.Azure.Security",
         "type": "IaaSAntimalware",
