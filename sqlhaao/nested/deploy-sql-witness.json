@@ -5,18 +5,6 @@
     "sqlWitnessVMName": {
       "type": "string"
     },
-    "domainName": {
-      "type": "string"
-    },
-    "domainUsername": {
-      "type": "string"
-    },
-    "domainPassword": {
-      "type": "string"
-    },
-    "ouPath": {
-      "type": "string"
-    },
     "sharePath": {
       "type": "string"
     },
