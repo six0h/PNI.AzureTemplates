@@ -381,6 +381,8 @@
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "2016-09-01",
       "dependsOn": [
+        "[resourceId('Microsoft.Compute/virtualMachines',concat(parameters('namePrefix'),1))]",
+        "[resourceId('Microsoft.Compute/virtualMachines',concat(parameters('namePrefix'),2))]",
         "[resourceId('Microsoft.Compute/virtualMachines',variables('sqlWitnessVMName'))]"
       ],
       "properties": {
