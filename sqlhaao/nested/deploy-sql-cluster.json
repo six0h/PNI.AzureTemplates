@@ -58,6 +58,12 @@
     "sqlWitnessVMSize": {
       "type": "string"
     },
+    "sqlAdmin": {
+      "type": "string"
+    },
+    "sqlPassword": {
+      "type": "securestring"
+    },
     "storageAccountType": {
       "type": "securestring"
     },
@@ -499,6 +505,12 @@
           },
           "sqlLBIPAddress": {
             "value": "[parameters('sqlLBIPAddress')]"
+          },
+          "sqlAdmin": {
+            "value": "[parameters('sqlAdmin')]"
+          },
+          "sqlPassword": {
+            "value": "[parameters('sqlPassword')]"
           },
           "existingAdPDCVMName": {
             "value": "[parameters('existingAdPDCVMName')]"

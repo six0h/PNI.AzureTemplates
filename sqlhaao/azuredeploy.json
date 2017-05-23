@@ -116,6 +116,12 @@
       },
       "defaultValue": "Standard_DS1"
     },
+    "sqlAdmin": {
+      "type": "string"
+    },
+    "sqlPassword": {
+      "type": "securestring"
+    },
     "storageAccountType": {
       "type": "string",
       "allowedValues": [
@@ -200,6 +206,12 @@
           },
           "sqlWitnessVMSize": {
             "value": "[parameters('sqlWitnessVMSize')]"
+          },
+          "sqlAdmin": {
+            "value": "[parameters('sqlAdmin')]"
+          },
+          "sqlPassword": {
+            "value": "[parameters('sqlPassword')]"
           },
           "storageAccountType": {
             "value": "[parameters('storageAccountType')]"

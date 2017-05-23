@@ -47,6 +47,12 @@
     "sqlAlwaysOnAvailabilityGroupListenerName1": {
       "type": "string"
     },
+    "sqlAdmin": {
+      "type": "string"
+    },
+    "sqlPassword": {
+      "type": "securestring"
+    },
     "_artifactsLocation": {
       "type": "string"
     },
@@ -60,7 +66,6 @@
     "createClusterModulesURL": "[concat(parameters('_artifactsLocation'),'/dsc/create-failover-cluster.ps1.zip',parameters('_artifactsLocationSasToken'))]",
     "createClusterConfigurationFunction": "CreateFailoverCluster.ps1\\CreateFailoverCluster",
     "clusterName": "[parameters('namePrefix')]",
-    "startCount": "1" 
   },
   "resources": [
     {
