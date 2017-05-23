@@ -403,7 +403,7 @@
             "value": "[parameters('count')]"
           },
           "startCount": {
-            "value": 1
+            "value": 0 
           },
           "namePrefix": {
             "value": "[parameters('namePrefix')]"
