@@ -80,6 +80,9 @@
     "retTag": {
       "type": "string"
     },
+    "runTimestamp": {
+      "type": "string"
+    },
     "sqlLBIPAddress": {
       "type": "string",
       "metadata": {
@@ -200,6 +203,9 @@
           },
           "storageAccountType": {
             "value": "[parameters('storageAccountType')]"
+          },
+          "runTimestamp": {
+            "value": "[parameters('runTimestamp')]"
           }
         },
         "templateLink": {

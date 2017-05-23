@@ -40,6 +40,9 @@
     "ouPath": {
       "type": "string"
     },
+    "runTimestamp": {
+      "type": "string"
+    },
     "sqlLBIPAddress": {
       "type": "string"
     },
@@ -374,7 +377,7 @@
       }
     },
     {
-      "name": "DeployJoinAD",
+      "name": "[concat('DeployJoinAD-', parameters('runTimestamp'))]",
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "2016-09-01",
       "dependsOn": [
@@ -412,7 +415,7 @@
       }
     },
     {
-      "name": "[variables('deploySqlWitnessShare')]",
+      "name": "[concat(variables('deploySqlWitnessShare'),'-',parameters('runTimestamp'))]",
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "2016-09-01",
       "dependsOn": [
@@ -453,7 +456,7 @@
       }
     },
     {
-      "name": "[variables('deploySqlAlwaysOn')]",
+      "name": "[concat(variables('deploySqlAlwaysOn'),'-',parameters('runTimestamp'))]",
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "2016-09-01",
       "dependsOn": [
