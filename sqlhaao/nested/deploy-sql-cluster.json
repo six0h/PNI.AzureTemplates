@@ -41,7 +41,7 @@
       "type": "string"
     },
     "runTimestamp": {
-      "type": "string"
+      "type": "int"
     },
     "sqlLBIPAddress": {
       "type": "string"
