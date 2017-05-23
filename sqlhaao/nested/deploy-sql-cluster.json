@@ -47,7 +47,7 @@
       "type": "string"
     },
     "sqlServerServiceAccountPassword": {
-      "type": "securestring"
+      "type": "string"
     },
     "sqlServerServiceAccountUserName": {
       "type": "string"

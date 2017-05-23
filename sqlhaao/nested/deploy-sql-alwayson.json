@@ -9,7 +9,7 @@
       "type": "string"
     },
     "domainPassword": {
-      "type": "securestring"
+      "type": "string"
     },
     "namePrefix": {
       "type": "string"
@@ -36,7 +36,7 @@
       "type": "string"
     },
     "sqlServerServiceAccountPassword": {
-      "type": "securestring"
+      "type": "string"
     },
     "sqlAlwaysOnEndpointName": {
       "type": "string"
@@ -68,7 +68,9 @@
       "name": "[concat(parameters('namePrefix'),'0/sqlAOPrepare')]",
       "apiVersion": "2016-04-30-preview",
       "location": "[resourceGroup().location]",
-      "dependsOn": [],
+      "dependsOn": [
+
+      ],
       "properties": {
         "publisher": "Microsoft.Powershell",
         "type": "DSC",

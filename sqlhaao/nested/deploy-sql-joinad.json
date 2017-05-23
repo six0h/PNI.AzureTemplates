@@ -13,7 +13,7 @@
       "type": "string"
     },
     "domainPassword": {
-      "type": "securestring"
+      "type": "string"
     },
     "domainOptions": {
       "type": "int",

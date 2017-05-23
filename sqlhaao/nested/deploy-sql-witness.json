@@ -12,7 +12,7 @@
       "type": "string"
     },
     "domainPassword": {
-      "type": "securestring"
+      "type": "string"
     },
     "ouPath": {
       "type": "string"
