@@ -143,7 +143,7 @@
   },
   "resources": [
     {
-      "name": "[variables('deploySqlCluster')]",
+      "name": "[concat(variables('deploySqlCluster'),'-',parameters('runTimestamp')]",
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "2016-06-01",
       "dependsOn": [],
