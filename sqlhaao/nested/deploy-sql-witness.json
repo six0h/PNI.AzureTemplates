@@ -48,11 +48,18 @@
           "modulesUrl": "[variables('fswModulesURL')]",
           "configurationFunction": "[variables('fswConfigurationFunction')]",
           "properties": {
+            "domainName": "[parameters('domainName')]",
             "sharePath": "[parameters('sharePath')]",
+            "OUPath": "[parameters('ouPath')]",
+            "adminCreds": {
+              "userName": "[parameters('domainUsername')]",
+              "password": "PrivateSettingsRef:adminPassword"
+            }
           }
         },
         "protectedSettings": {
           "items": {
+            "adminPassword": "[parameters('domainPassword')]"
           }
         }
       }
